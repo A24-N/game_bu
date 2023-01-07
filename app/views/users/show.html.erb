@@ -1,2 +1,59 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="container mt-4">
+  <p class="h4">マイページ</p>
+  <div class="row">
+
+    <div class="col-3">
+      <p class="text-center h5 mt-2">my-info</p>
+      <table class="table table-borderless">
+        <tr>
+          <td><%= image_tag @user.get_image(100,100) %></td>
+        </tr>
+        <tr>
+          <td>ニックネーム:<%= current_user.nickname %></td>
+        </tr>
+        <tr>
+          <td>紹介文一覧</td>
+        </tr>
+        <tr>
+          <td>いいね一覧</td>
+        </tr>
+        <tr>
+          <td>フォロー一覧</td>
+        </tr>
+        <tr>
+          <td>フォロワー一覧</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-8 offset-1">
+      <p class="h5">my-info詳細</p>
+      <table class="table table-borderless">
+        <tr>
+          <td class="text-center"><%= image_tag @user.get_image(100,100) %></td>
+          <td class="align-middle"><%= @user.nickname %></td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">自己紹介:</td>
+        </tr>
+        <td colspan="2"><%= @user.introduction %></td>
+        <tr>
+          <td class="col-5 font-weight-bold">プレイスタイル:</td>
+          <td class="font-weight-bold" >活動時間:</td>
+        </tr>
+        <tr>
+          <td><%= @user.playstyle %></td>
+          <td><%= @user.activetime %></td>
+        </tr>
+        <td colspan="2" class="text-right "><%= link_to "編集", edit_user_path(current_user), class: 'btn btn-outline-success' %></td>
+      </table>
+    </div>
+
+    <div class="col-8 offset-4">
+      <p class="h5">投稿一覧</p>
+      <table class="table table-borderless">
+      </table>
+    </div>
+
+  </div>
+</div>
