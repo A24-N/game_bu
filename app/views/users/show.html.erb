@@ -1,38 +1,38 @@
 <div class="container mt-4">
-  <p class="h4">マイページ</p>
   <div class="row">
-
     <%= render 'info', user: current_user %>
 
-    <div class="col-8 offset-1">
-      <p class="h5">my-info詳細</p>
-      <table class="table table-borderless">
-        <tr>
-          <td class="text-center"><%= image_tag @user.get_image(100,100) %></td>
-          <td class="align-middle"><%= @user.nickname %></td>
-        </tr>
-        <tr>
-          <td class="font-weight-bold">自己紹介:</td>
-        </tr>
-        <td colspan="2"><%= @user.introduction %></td>
-        <tr>
-          <td class="col-5 font-weight-bold">プレイスタイル:</td>
-          <td class="font-weight-bold" >活動時間:</td>
-        </tr>
-        <tr>
-          <td><%= @user.playstyle %></td>
-          <td><%= @user.activetime %></td>
-        </tr>
-        <td></td>
-        <td class="text-center "><%= link_to "編集", edit_user_path(current_user), class: 'btn btn-outline-success' %></td>
-      </table>
-    </div>
+    <div class="col-8">
+      <p class="h4">マイページ</p>
+      <div class="col-8 offset-1">
+        <p class="h5">my-info詳細</p>
+        <table class="table table-borderless">
+          <tr>
+            <td class="text-center"><%= image_tag @user.get_image(100,100) %></td>
+            <td class="align-middle"><%= @user.nickname %></td>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">自己紹介:</td>
+          </tr>
+          <td colspan="2"><%= @user.introduction %></td>
+          <tr>
+            <td class="col-5 font-weight-bold">プレイスタイル:</td>
+            <td class="font-weight-bold" >活動時間:</td>
+          </tr>
+          <tr>
+            <td><%= @user.playstyle %></td>
+            <td><%= @user.activetime %></td>
+          </tr>
+          <td></td>
+          <td class="text-center "><%= link_to "編集", edit_user_path(current_user), class: 'btn btn-outline-success' %></td>
+        </table>
+      </div>
 
-    <div class="col-8 offset-4">
-      <p class="h5">投稿一覧</p>
-      <table class="table table-borderless">
-      </table>
+      <div class="col-8 offset-4">
+        <p class="h5">投稿一覧</p>
+        <table class="table table-borderless">
+        </table>
+      </div>
     </div>
-
   </div>
 </div>

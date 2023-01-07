@@ -3,7 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
+  has_many :posts, dependent: :destroy
+  
   has_one_attached :image
 
   enum playstyle: {empty: 0, enjoy: 1, hard: 2}

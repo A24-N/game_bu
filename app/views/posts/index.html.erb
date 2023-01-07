@@ -1,11 +1,47 @@
 <div class="container mt-4">
-  <p class="h4">投稿一覧</p>
   <div class="row">
-
     <%= render 'users/info', user: current_user %>
 
-    <div class="col-8 offset-1">
-      <p>今の状況を投稿しよう！</p>
-    </div>
+    <div class="col-8">
+      <p class="h4">投稿一覧</p>
+      <div class="col-8 offset-1">
+        <p>今の状況を投稿しよう！</p>
+        <%= form_with model: @npost do |f| %>
+          <div class="field">
+            <%= f.label :title %>
+            <%= f.text_field :title %>
+          </div>
+
+          <div class="field">
+            <%= f.label :body %>
+            <%= f.text_field :body %>
+          </div>
+
+          <div class="action">
+            <%= f.submit "投稿" %>
+          </div>
+        <% end %>
+      </div>
+
+
+      <div class="col-8 mt-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <td></td>
+          <td>投稿者</td>
+          <td>タイトル</td>
+        </tr>
+      </thead>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= image_tag post.user.get_image(80,80) %></td>
+          <td><%= post.user.nickname %></td>
+          <td><%= post.title %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+      </div>
   </div>
 </div>
