@@ -2,29 +2,7 @@
   <p class="h4">マイページ</p>
   <div class="row">
 
-    <div class="col-3">
-      <p class="text-center h5 mt-2">my-info</p>
-      <table class="table table-borderless">
-        <tr>
-          <td><%= image_tag @user.get_image(100,100) %></td>
-        </tr>
-        <tr>
-          <td>ニックネーム:<%= current_user.nickname %></td>
-        </tr>
-        <tr>
-          <td>紹介文一覧</td>
-        </tr>
-        <tr>
-          <td>いいね一覧</td>
-        </tr>
-        <tr>
-          <td>フォロー一覧</td>
-        </tr>
-        <tr>
-          <td>フォロワー一覧</td>
-        </tr>
-      </table>
-    </div>
+    <%= render 'info', user: current_user %>
 
     <div class="col-8 offset-1">
       <p class="h5">my-info詳細</p>
