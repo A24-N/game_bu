@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["introduce_from_user_id", "introduce_to_user_id"], name: "introduce_unique_index", unique: true
     t.index ["introduce_from_user_id"], name: "index_introduces_on_introduce_from_user_id"
     t.index ["introduce_to_user_id"], name: "index_introduces_on_introduce_to_user_id"
   end
@@ -111,6 +112,7 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
     t.integer "follower_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["follow_id", "follower_id"], name: "index_relationships_on_follow_id_and_follower_id", unique: true
     t.index ["follow_id"], name: "index_relationships_on_follow_id"
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
@@ -153,8 +155,8 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
   add_foreign_key "comments", "users"
   add_foreign_key "favorites", "posts"
   add_foreign_key "favorites", "users"
-  add_foreign_key "introduces", "introduce_from_users"
-  add_foreign_key "introduces", "introduce_to_users"
+  add_foreign_key "introduces", "users", column: "introduce_from_user_id"
+  add_foreign_key "introduces", "users", column: "introduce_to_user_id"
   add_foreign_key "matches", "rooms"
   add_foreign_key "matches", "users"
   add_foreign_key "messages", "rooms"
@@ -162,7 +164,7 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
   add_foreign_key "post_tag_relations", "posts"
   add_foreign_key "post_tag_relations", "tags"
   add_foreign_key "posts", "users"
-  add_foreign_key "relationships", "followers"
-  add_foreign_key "relationships", "follows"
+  add_foreign_key "relationships", "users", column: "follow_id"
+  add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "rooms", "users"
 end
