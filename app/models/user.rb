@@ -7,6 +7,10 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+# マッチング機能
+  has_many :messages, dependent: :destroy
+  has_many :matches, dependent: :destroy
+
   has_one_attached :image
 
   enum playstyle: {empty: 0, enjoy: 1, hard: 2}
@@ -21,4 +25,23 @@ class User < ApplicationRecord
     image.variant(resize_to_limit: [width, height]).processed
   end
 
+# マッチングステータス切替の処理
+  def status_change
+    if self.matching_status == "afk"
+      self.update(matching_status: 1)
+      @room = Room.new
+      @match = Match.new
+      @room.user_id = self.id
+      @room.save
+      @match.room_id = @room.id
+      @match.user_id = self.id
+      @match.save
+    elsif self.matching_status == "stand_by"
+      self.update(matching_status: 0)
+      @room = Room.find_by(user_id: self.id)
+      @match = Match.find_by(user_id: self.id)
+      @room.destroy
+      @match.destroy
+    end
+  end
 end

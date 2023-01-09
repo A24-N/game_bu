@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update, :destroy] do
     get 'unsubscribe' => "users#unsubscribe"
+    patch 'status_change' => "users#status_change"
+    patch 'matching' => "users#matching"
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
@@ -18,5 +20,9 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end
+
+  resources :messages, only: [:create]
+  resources :rooms, only: [:create, :show]
+  resources :matches, only: [:index, :destroy]
 
 end
