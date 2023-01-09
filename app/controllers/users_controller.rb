@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
-  def unsubscribe
+
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    flash[:notice] = 'ユーザーを削除しました。'
+    redirect_to :root
   end
 
   def edit
