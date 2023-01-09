@@ -1,1 +1,17 @@
-<p>退会ページ</p>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-11 offset-1 mt-2">
+      <p class="h4">退会確認ページ</p>
+      <div class="h5 text-center mt-5">
+        <span class="text-info h4">退会前に以下をご確認ください。</span><br><br>
+        会員を退会された場合には、投稿・紹介文・フォロー等の情報は<br>
+        <span class="text-danger font-weight-bold">すべて削除</span>されます。<br>
+        以上同意のうえで、退会をお願いいたします。
+      </div>
+      <div class="action">
+        <%= link_to "退会を取り消す", user_path(current_user), class: 'btn btn-success' %>
+        <%= link_to "退会する", user_path(current_user), method: :delete, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>
