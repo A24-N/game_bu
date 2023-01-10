@@ -118,10 +118,12 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "owner_id"
+    t.integer "member_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_rooms_on_user_id"
+    t.index ["member_id"], name: "index_rooms_on_member_id"
+    t.index ["owner_id"], name: "index_rooms_on_owner_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -143,6 +145,7 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
     t.boolean "is_user_deleted", default: false, null: false
     t.boolean "admin_status", default: false, null: false
     t.integer "matching_status", default: 0, null: false
+    t.string "room_comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -166,5 +169,6 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
   add_foreign_key "posts", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
   add_foreign_key "relationships", "users", column: "follower_id"
-  add_foreign_key "rooms", "users"
+  add_foreign_key "rooms", "users", column: "member_id"
+  add_foreign_key "rooms", "users", column: "owner_id"
 end

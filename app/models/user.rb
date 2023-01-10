@@ -24,44 +24,4 @@ class User < ApplicationRecord
     end
     image.variant(resize_to_limit: [width, height]).processed
   end
-
-# マッチングステータス切替の処理
-  def status_change
-    if self.matching_status == "afk"
-      self.update(matching_status: 1)
-      @room = Room.new
-      @match = Match.new
-      @room.user_id = self.id
-      @room.save
-      @match.room_id = @room.id
-      @match.user_id = self.id
-      @match.save
-    elsif self.matching_status == "stand_by"
-      self.update(matching_status: 0)
-      @room = Room.find_by(user_id: self.id)
-      @match = Match.find_by(user_id: self.id)
-      @room.destroy
-      @match.destroy
-    end
-  end
-
-  #ルーム作成処理
-  def create_room
-    @room = Room.new
-    @match = Match.new
-    @room.user_id = self.id
-    @room.save
-    @match.room_id = @room.id
-    @match.user_id = self.id
-    @match.save
-  end
-
-  #ルーム削除処理
-  def delete_room(user)
-    @room = Room.find_by(user_id: self.id)
-    @match = Match.find_by(user_id: self.id)
-    @room.destroy
-    @match.destroy
-  end
-  
 end

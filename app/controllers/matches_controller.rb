@@ -5,5 +5,7 @@ class MatchesController < ApplicationController
   end
 
   def matching
+    @room = Room.find_by(owner_id: params[:user_id])
+    redirect_to room_path(@room)
   end
 end
