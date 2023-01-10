@@ -5,6 +5,15 @@
     <div class="col-8">
       <p class="h4">マッチング一覧</p>
       <%= link_to "マッチング待機ボタン", user_status_change_path(current_user), method: :patch %>
+      <%= form_with model: @user, url: user_status_change_path(current_user) do |f| %>
+        <% if @user.matching_status == "stand_by" %>
+          <%= f.hidden_field :matching_status, value: "afk" %>
+        <% else %>
+          <%= f.hidden_field :matching_status, value: "stand_by" %>
+        <% end %>
+        <%= f.submit "更新", class: 'btn btn-outline-success' %>
+      <% end %>
+
         <% @user_stand_by.each do |user| %>
         <table>
           <tr>

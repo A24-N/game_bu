@@ -20,10 +20,30 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+#マッチングステータスの切り替え
   def status_change
-    current_user.status_change
-    @user_stand_by =User.where(matching_status: 1)
-    render template: "matches/index"
+    @user = User.find(current_user.id)
+    @user.update(user_params)
+#ルームの作成
+    if @user.matching_status == "stand_by"
+      @room = Room.new
+      @match = Match.new
+      @room.user_id = current_user.id
+      @room.save
+      @match.room_id = @room.id
+      @match.user_id = current_user.id
+      @match.save
+#ルームの削除
+    elsif @user.matching_status == "afk"
+      @room = Room.find_by(user_id: current_user.id)
+      @match = Match.find_by(user_id: current_user.id)
+      @room.destroy
+      @match.destroy
+    end
+    redirect_to request.referer
+    # current_user.status_change
+    # @user_stand_by =User.where(matching_status: 1)
+    # render template: "matches/index"
   end
 
   def matching
@@ -48,6 +68,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:introduction, :image, :playstyle, :activetime)
+    params.require(:user).permit(:introduction, :image, :playstyle, :activetime, :matching_status )
   end
 end
