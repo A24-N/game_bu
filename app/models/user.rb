@@ -14,7 +14,6 @@ class User < ApplicationRecord
   has_one_attached :image
 
   enum playstyle: {empty: 0, enjoy: 1, hard: 2}
-  enum matching_status: {afk: 0, stand_by: 1, in_action: 2 }
 
 # プロフィール画像登録時の処理
   def get_image(width, height)

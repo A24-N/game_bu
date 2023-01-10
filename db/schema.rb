@@ -73,6 +73,9 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
   create_table "matches", force: :cascade do |t|
     t.integer "user_id"
     t.integer "room_id"
+    t.integer "matching_status", default: 0, null: false
+    t.string "room_comment"
+    t.string "game_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_matches_on_room_id"
@@ -144,8 +147,6 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
     t.string "activetime"
     t.boolean "is_user_deleted", default: false, null: false
     t.boolean "admin_status", default: false, null: false
-    t.integer "matching_status", default: 0, null: false
-    t.string "room_comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

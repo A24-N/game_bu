@@ -38,9 +38,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :activetime
       t.boolean :is_user_deleted, default: false, null: false
       t.boolean :admin_status, default: false, null: false
-      t.integer :matching_status, default: 0, null: false
-      t.string :room_comment
-
 
       t.timestamps null: false
     end

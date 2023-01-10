@@ -1,11 +1,49 @@
 class MatchesController < ApplicationController
   def index
-    @user = current_user
-    @user_stand_by =User.where(matching_status: 1)
+    @match = Match.new
+    @match_status = Match.find_by(user_id: current_user.id)
+    @user_stand_by = Match.where(matching_status: "stand_by")
+    @room = Room.where(owner_id: current_user).or(Room.where(member_id: current_user))
   end
 
+#マッチングステータスをstand_byに変更
+  def create
+    match = Match.new(match_params)
+    match.matching_status = 1
+    match.user_id = current_user.id
+    match.save
+    redirect_to request.referer
+  end
+
+#マッチングステータスをafkに変更
+  def destroy
+    match = Match.find_by(user_id: current_user.id)
+    match.destroy
+    redirect_to request.referer
+  end
+
+#マッチング後にルームを作成
   def matching
-    @room = Room.find_by(owner_id: params[:user_id])
+    @match = Match.new
+    @match.matching_status = 2
+    @match.user_id = current_user.id
+    @match.save
+
+    @owner_match = Match.find_by(user_id: params[:user_id])
+    @owner_match.matching_status = 2
+    @owner_match.update(match_params)
+
+    @room = Room.new
+    @room.owner_id = params[:user_id]
+    @room.member_id = current_user.id
+    @room.save
+
     redirect_to room_path(@room)
+  end
+
+  private
+
+  def match_params
+    params.permit(:matching_status, :room_comment, :game_name)
   end
 end

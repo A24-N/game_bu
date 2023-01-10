@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'rooms/show'
-  get 'matches/index'
   devise_for :users
 
   root to: "homes#top"
@@ -8,8 +6,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update, :destroy] do
     get 'unsubscribe' => "users#unsubscribe"
-    patch 'status_change' => "users#status_change"
-    # patch 'matching' => "users#matching"
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
@@ -22,8 +18,8 @@ Rails.application.routes.draw do
   end
 
   resources :messages, only: [:create]
-  resources :rooms, only: [:create, :show]
-  resources :matches, only: [:index, :destroy, :update]
-  patch 'match/matching' => "matches#matching"
+  resources :rooms, only: [:create, :show, :destroy]
+  resources :matches, only: [:index, :destroy, :create]
+  patch 'matches/matching' => "matches#matching"
 
 end
