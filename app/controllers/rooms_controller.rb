@@ -4,6 +4,8 @@ class RoomsController < ApplicationController
     @owner = @room.owner
     @member = @room.member
     @match = Match.find_by(user_id: @owner.id)
+    @message = Message.new
+    @messages = @room.messages.all
   end
 
   def destroy
