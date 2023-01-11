@@ -8,10 +8,9 @@ class MatchesController < ApplicationController
 
 #マッチングステータスをstand_byに変更
   def create
-    match = Match.new(match_params)
-    match.matching_status = 1
-    match.user_id = current_user.id
-    match.save
+    @match = Match.new(match_params)
+    @match.user_id = current_user.id
+    @match.save
     redirect_to request.referer
   end
 
@@ -31,7 +30,7 @@ class MatchesController < ApplicationController
 
     @owner_match = Match.find_by(user_id: params[:user_id])
     @owner_match.matching_status = 2
-    @owner_match.update(match_params)
+    @owner_match.update(params.permit(:matching_status))
 
     @room = Room.new
     @room.owner_id = params[:user_id]
@@ -44,6 +43,6 @@ class MatchesController < ApplicationController
   private
 
   def match_params
-    params.permit(:matching_status, :room_comment, :game_name)
+    params.require(:match).permit(:matching_status, :room_comment, :game_name)
   end
 end

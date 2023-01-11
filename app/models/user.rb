@@ -6,10 +6,12 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-
 # マッチング機能
   has_many :messages, dependent: :destroy
   has_many :matches, dependent: :destroy
+#ルームで各ユーザー情報を表示
+  has_many :owner, through: :matches, source: :owner_id
+  has_many :member, through: :matches, source: :member_id
 
   has_one_attached :image
 
