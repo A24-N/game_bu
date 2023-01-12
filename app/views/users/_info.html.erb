@@ -8,7 +8,7 @@
       <td>ニックネーム:<%= user.nickname %></td>
     </tr>
     <tr>
-      <td>紹介文一覧</td>
+      <td><%= link_to "紹介文一覧", user_introduces_path(user) %></td>
     </tr>
     <tr>
       <td><%= link_to "いいねした投稿", user_favorites_path(user) %></td>

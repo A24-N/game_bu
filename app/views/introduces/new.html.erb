@@ -1,2 +1,20 @@
-<h1>Introduces#new</h1>
-<p>Find me in app/views/introduces/new.html.erb</p>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-11 offset-1 mt-2">
+      <p class="h4"><%= @user.nickname %>さんの紹介文を書く</p>
+    </div>
+    <div class="col-11 offset-1 mt-2">
+      <p>！注意点！</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-11 offset-1 mt-2">
+      <%= form_with model: @introduce, url: user_introduces_path do |f| %>
+        <div class="introduces">
+          <%= f.label :紹介文 %>
+          <%= f.text_area :body, class: 'form-control' %>
+          <%= f.submit "保存" %>
+        </div>
+      <% end %>
+</div>

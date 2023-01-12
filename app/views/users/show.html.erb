@@ -29,6 +29,8 @@
             <% end %>
             <%= render 'relationships/follow_btn', user: @user %>
           </td>
+          <td><%= link_to "紹介文を書く", new_user_introduce_path(@user.id) %></td>
+          <td></td>
         </table>
       </div>
 
