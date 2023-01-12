@@ -14,7 +14,7 @@
           <tr>
             <td class="font-weight-bold">自己紹介:</td>
           </tr>
-          <td colspan="2"><%= @user.introduction %></td>
+          <td colspan="2"><%= safe_join(@user.introduction.split("\n"),tag(:br)) %></td>
           <tr>
             <td class="col-5 font-weight-bold">プレイスタイル:</td>
             <td class="font-weight-bold" >活動時間:</td>
@@ -29,8 +29,11 @@
             <% end %>
             <%= render 'relationships/follow_btn', user: @user %>
           </td>
-          <td><%= link_to "紹介文を書く", new_user_introduce_path(@user.id) %></td>
-          <td></td>
+          <% if @user != current_user %>
+            <td><%= link_to "紹介文を書く", new_user_introduce_path(params[:id]), class: 'btn btn-info' %></td>
+          <% else %>
+            <td></td>
+          <% end %>
         </table>
       </div>
 
