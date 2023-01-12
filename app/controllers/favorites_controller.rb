@@ -10,4 +10,9 @@ class FavoritesController < ApplicationController
     @post_favorite.destroy
     redirect_to request.referer
   end
+
+  def favorite
+    favorites = Favorite.where(user_id: current_user.id).pluck(:post_id)
+    @posts = Post.find(favorites)
+  end
 end

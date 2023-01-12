@@ -23,8 +23,12 @@
             <td><%= @user.playstyle %></td>
             <td><%= @user.activetime %></td>
           </tr>
-          <td></td>
-          <td class="text-center "><%= link_to "編集", edit_user_path(current_user), class: 'btn btn-outline-success' %></td>
+          <td>
+            <% if current_user == @user %>
+              <%= link_to "編集", edit_user_path(@user), class: 'btn btn-outline-success' %>
+            <% end %>
+            <%= render 'relationships/follow_btn', user: @user %>
+          </td>
         </table>
       </div>
 

@@ -11,13 +11,13 @@
       <td>紹介文一覧</td>
     </tr>
     <tr>
-      <td>いいね一覧</td>
+      <td><%= link_to "いいねした投稿", user_favorites_path(user) %></td>
     </tr>
     <tr>
-      <td>フォロー一覧</td>
+      <td><%= link_to "フォロー一覧", user_followings_path(user) %></td>
     </tr>
     <tr>
-      <td>フォロワー一覧</td>
+      <td><%= link_to "フォロワー一覧", user_followers_path(user) %></td>
     </tr>
   </table>
 </div>
