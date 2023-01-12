@@ -1,0 +1,13 @@
+<div class="container mt-4">
+  <div class="row">
+    <%= render 'users/info', user: current_user %>
+
+    <div class="col-8">
+      <p class="h4">いいねした投稿一覧</p>
+      <div class="mt-4">
+        <%= render 'posts/index', posts: @posts %>
+      </div>
+    </div>
+
+  </div>
+</div>
