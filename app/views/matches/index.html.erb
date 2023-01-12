@@ -1,2 +1,39 @@
-<h1>Matches#index</h1>
-<p>Find me in app/views/matches/index.html.erb</p>
+<div class="container mt-4">
+  <div class="row">
+    <%= render 'users/info', user: current_user %>
+
+    <div class="col-8">
+      <p class="h4">マッチング一覧</p>
+
+        <!--NoMethodErrorを防ぐために&を活用-->
+        <% if @match_status&.matching_status == "stand_by" %>
+          <%= link_to "マッチング待機解除", match_path(@match_status), method: :delete, class: 'btn btn-outline-success' %>
+        <% elsif @match_status&.matching_status == "in_action" %>
+          <%= link_to "マッチング中", room_path(@room.ids), class: 'btn btn-outline-success' %>
+        <% else %>
+          <%= form_with model: @match do |f| %>
+            <%= f.hidden_field :matching_status, value: "stand_by" %>
+            <%= f.text_field :room_comment, placeholder: "コメントをここに" %><br>
+            <%= f.text_field :game_name, placeholder: "ゲーム名をここに" %>
+            <%= f.submit "マッチング待機開始", class: 'btn btn-outline-success' %>
+          <% end %>
+        <% end %>
+
+        <% @user_stand_by.each do |match| %>
+        <table class="table">
+          <tr>
+            <th colspan=2>待機中ユーザー</th>
+            <th>ルームコメント</th>
+
+          </tr>
+          <tr>
+            <td style="width:80px;"><%= image_tag match.user.get_image(80,80) %></td>
+            <td><%= match.user.nickname %></td>
+            <td><%= match.room_comment %></td>
+            <td><%= link_to "マッチング", matches_matching_path(user_id: match.user.id), method: :patch, class: 'btn btn-info' %></td>
+          </tr>
+        </table>
+        <% end %>
+    </div>
+  </div>
+</div>

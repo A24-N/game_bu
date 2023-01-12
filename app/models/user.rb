@@ -6,11 +6,16 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+# マッチング機能
+  has_many :messages, dependent: :destroy
+  has_many :matches, dependent: :destroy
+#ルームで各ユーザー情報を表示
+  has_many :owner, through: :matches, source: :owner_id
+  has_many :member, through: :matches, source: :member_id
 
   has_one_attached :image
 
   enum playstyle: {empty: 0, enjoy: 1, hard: 2}
-  enum matching_status: {afk: 0, stand_by: 1, in_action: 2 }
 
 # プロフィール画像登録時の処理
   def get_image(width, height)
@@ -20,5 +25,4 @@ class User < ApplicationRecord
     end
     image.variant(resize_to_limit: [width, height]).processed
   end
-
 end

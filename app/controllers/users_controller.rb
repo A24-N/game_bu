@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   def destroy
     user = User.find(params[:id])
     user.destroy
@@ -21,8 +20,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+
+
   private
   def user_params
-    params.require(:user).permit(:introduction, :image, :playstyle, :activetime)
+    params.require(:user).permit(:introduction, :image, :playstyle, :activetime )
   end
 end
