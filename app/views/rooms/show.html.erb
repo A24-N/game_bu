@@ -7,17 +7,20 @@
       <%= link_to "ルーム解散", room_path(@room), method: :delete, class: 'btn btn-danger' %>
     </div>
   </div>
-    <div class="col-11 mt-2">
-      <p>ルーム情報</p>
-      <p>ルームコメント：<%= @match.room_comment %></p>
-      <p>ゲーム名：<%= @match.game_name %></p>
 
+    <div class="row mt-2">
+      <p class="col-12">ルーム情報</p>
+      <p class="col-12 ml-3">ルームコメント：<%= @match.room_comment %><br></p>
+      <p class="col-12 ml-3">ゲーム名：<%= @match.game_name %></p>
     </div>
+
   <div class="row">
     <p class="col-12">チャット</p>
-    <div class="col-2 text-center">
-      <%= image_tag @owner.get_image(100,100) %><br>
-      <%= @owner.nickname %>
+    <div class="col-2 text-center font-weight-bold">
+      <%= link_to user_path(@owner.id) do %>
+        <%= image_tag @owner.get_image(100,100) %><br>
+        <%= @owner.nickname %>
+      <% end %>
     </div>
 
     <div class="col-8">
@@ -54,9 +57,11 @@
       <% end %>
     </div>
 
-    <div class="col-2 text-center">
-      <%= image_tag @member.get_image(100,100) %><br>
-      <%= @member.nickname %>
+    <div class="col-2 text-center font-weight-bold">
+      <%= link_to user_path(@member.id) do %>
+        <%= image_tag @member.get_image(100,100) %><br>
+        <%= @member.nickname %>
+      <% end %>
     </div>
   </div>
 </div>
