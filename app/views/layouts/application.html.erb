@@ -14,6 +14,8 @@
     <%= render 'layouts/header' %>
     <main>
       <div class="text-right">
+        <%= content_tag(:div, flash[:alert], class: "alert alert-danger text-left") if flash[:alert] %>
+        <%= content_tag(:div, flash[:notice], class: "alert alert-success text-left") if flash[:notice] %>
         <%= render 'searches/search_form' %>
         <%= render 'searches/tag_search_form' %>
       </div>

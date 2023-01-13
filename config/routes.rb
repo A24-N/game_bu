@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
 
   root to: "homes#top"
+  get 'main' => "homes#main"
   get 'about' => "homes#about"
 
   resources :users, only: [:show, :edit, :update, :destroy] do
@@ -25,4 +25,8 @@ Rails.application.routes.draw do
 
   patch 'matches/matching' => "matches#matching"
   get "search" => "searches#search"
+
+  namespace :admin do
+    root to: 'homes#top'
+  end
 end

@@ -4,9 +4,13 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.try(:admin_status?)
-      can :access, :rails_admin
-      can :manage, :all
+    user ||= User.new
+    can :read,  :all
+
+    if user.admin_status?
+      can :manage,  :all
+      can :access_admin_page, :all
+
     end
     # Define abilities for the user here. For example:
     #
