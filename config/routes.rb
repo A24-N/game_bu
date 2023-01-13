@@ -18,10 +18,10 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
-
   resources :rooms, only: [:create, :show, :destroy]
-    resources :messages, only: [:create, :destroy]
+  resources :messages, only: [:create, :destroy]
   resources :matches, only: [:index, :destroy, :create]
-  patch 'matches/matching' => "matches#matching"
 
+  patch 'matches/matching' => "matches#matching"
+  get "search" => "searches#search"
 end
