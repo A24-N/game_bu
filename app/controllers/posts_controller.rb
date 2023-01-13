@@ -5,16 +5,20 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(post_params)
-    post.user_id = current_user.id
-    post.save
-    redirect_to post_path(post.id)
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    tag_list = params[:post][:tag].split(',')
+    if @post.save
+      @post.save_tag(tag_list)
+      redirect_to post_path(@post.id),notice:'投稿完了しました:)'
+    end
   end
 
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
     @comments = @post.comments
+    @tags = @post.tags
   end
 
   def edit
