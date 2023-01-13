@@ -9,8 +9,7 @@ class SearchesController < ApplicationController
     elsif @range == "Post"
       @posts = Post.looks(params[:search], params[:word])
     elsif @range == "Tag"
-      @word = params[:word]
-      @books = Book.joins(:tags).where("name LIKE?", "#{@word}")
+      @posts = Post.joins(:tags).where("name LIKE?", "#{@word}")
     end
   end
 end

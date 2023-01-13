@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     tag_list = params[:post][:tag].split(',')
     if @post.save
       @post.save_tag(tag_list)
-      redirect_to post_path(@post.id),notice:'投稿完了しました:)'
+      redirect_to post_path(@post.id)
     end
   end
 
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
     tag_list = params[:post][:name].split(',')
     if post.update(post_params)
       post.save_tag(tag_list)
-      redirect_to post_path(post),notice:'投稿完了しました:)'
+      redirect_to post_path(post)
     end
   end
 

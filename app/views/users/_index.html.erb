@@ -1,0 +1,24 @@
+<table class="table">
+  <tr>
+    <thead>
+      <th ></th>
+      <th>ニックネーム</th>
+      <th>フォロー数</th>
+      <th>フォロワー数</th>
+      <th>投稿数</th>
+    </thead>
+  </tr>
+  <% users.each do |user| %>
+    <tr>
+      <td style="width:80px;"><%= image_tag user.get_image(80,80) %></td>
+      <td class="align-middle">
+        <%= link_to user_path(user) do %>
+          <%= user.nickname %>
+        <% end %>
+      </td>
+      <td class="align-middle"><%= user.followings.count %></td>
+      <td class="align-middle"><%= user.followers.count %></td>
+      <td class="align-middle"><%= user.posts.count %></td>
+    </tr>
+  <% end %>
+</table>
