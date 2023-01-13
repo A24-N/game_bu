@@ -28,4 +28,15 @@ class Post < ApplicationRecord
       self.tags << new_post_tag
    end
   end
+
+#検索方法分岐
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @post = Post.where("title LIKE?", "#{word}")
+    elsif search == "partial_match"
+      @post = Post.where("title LIKE?", "%#{word}%")
+    else
+      @post =Post.all
+    end
+  end
 end

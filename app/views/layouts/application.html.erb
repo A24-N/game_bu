@@ -13,6 +13,10 @@
   <body>
     <%= render 'layouts/header' %>
     <main>
+      <div class="text-right">
+        <%= render 'searches/search_form' %>
+        <%= render 'searches/tag_search_form' %>
+      </div>
       <%= yield %>
     </main>
   </body>
