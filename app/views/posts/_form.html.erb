@@ -9,6 +9,11 @@
     <%= f.text_area :body, class:'form-control' %>
   </div>
 
+  <div class="field col-10">
+    <%= f.label :tag %>
+    <%= f.text_field :tag, value: @tag_list, class: 'form-control' %>
+  </div>
+
   <div class="action text-right">
     <%= f.submit "投稿", class:'btn btn-success' %>
   </div>

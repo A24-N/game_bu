@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
     t.integer "tag_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id", "tag_id"], name: "index_post_tag_relations_on_post_id_and_tag_id", unique: true
     t.index ["post_id"], name: "index_post_tag_relations_on_post_id"
     t.index ["tag_id"], name: "index_post_tag_relations_on_tag_id"
   end
