@@ -23,12 +23,16 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @tags = @post.tags.pluck(:name).join(',')
   end
 
   def update
     post = Post.find(params[:id])
-    post.update(post_params)
-    redirect_to post_path(post)
+    tag_list = params[:post][:name].split(',')
+    if post.update(post_params)
+      post.save_tag(tag_list)
+      redirect_to post_path(post),notice:'投稿完了しました:)'
+    end
   end
 
   def destroy

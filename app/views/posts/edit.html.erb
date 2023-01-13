@@ -14,6 +14,11 @@
           <%= f.text_area :body, class: 'form-control' %>
         </div>
 
+        <div class="field col-6 mt-3">
+          <%= f.label"タグ (,で区切ると複数タグ登録できます)" %>
+          <%= f.text_field :name, value: @tags ,class:"form-control"%>
+        </div>
+
         <div class="action col-6 text-right mt-3">
           <%= f.submit "変更", class: 'btn btn-success' %>
         </div>
