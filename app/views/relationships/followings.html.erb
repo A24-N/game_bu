@@ -1,1 +1,10 @@
-<h2>Follow Users</h2>
+<div class="container mt-4">
+  <div class="row">
+    <%= render 'users/info', user: current_user %>
+
+    <div class="col-8">
+      <p class="h4"><%= @user.nickname %>さんのフォロー一覧</p>
+      <%= render 'follow', users: @users %>
+    </div>
+  </div>
+</div>
