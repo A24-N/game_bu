@@ -12,12 +12,15 @@ class User < ApplicationRecord
 #ルームで各ユーザー情報を表示
   has_many :owner, through: :matches, source: :owner_id
   has_many :member, through: :matches, source: :member_id
-#フォロー関係で使用
+#フォロー関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follow_id", dependent: :destroy
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-#フォロー関係一覧画面で使用
+#フォロー関係一覧画面
   has_many :followings, through: :relationships, source: :follower
   has_many :followers, through: :reverse_of_relationships, source: :follow
+#紹介文関係
+  has_many :from_introduces,  class_name: "introduce", foreign_key: "introduce_from_user_id", dependent: :destroy
+  has_many :to_introduces,  class_name: "introduce", foreign_key: "introduce_to_user_id", dependent: :destroy
 
   has_one_attached :image
   enum playstyle: {empty: 0, enjoy: 1, hard: 2}

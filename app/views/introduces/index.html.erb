@@ -1,2 +1,31 @@
-<h1>Introduces#index</h1>
-<p>Find me in app/views/introduces/index.html.erb</p>
+<div class="container mt-4">
+  <div class="row">
+    <%= render 'users/info', user: current_user %>
+
+    <div class="col-8">
+      <p class="h4"><%= @user.nickname %>さんの紹介文</p>
+      <table class="table">
+        <% @introduces.each do |introduce| %>
+        <thead>
+          <tr>
+            <th><%= image_tag introduce.introduce_from_user.get_image(50,50) %></th>
+            <th><%= introduce.introduce_from_user.nickname %></th>
+            <% if introduce.introduce_from_user_id == current_user.id %>
+              <th><%= link_to "編集", edit_user_introduce_path(@user, introduce) %></th>
+              <th><%= link_to "削除", user_introduce_path(@user, introduce), method: :delete %></th>
+            <% else %>
+              <th></th>
+              <th></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan=4><%= safe_join(introduce.body.split("\n"),tag(:br)) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
