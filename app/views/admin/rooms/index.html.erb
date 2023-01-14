@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12 offset-1 mt-2">
+      <p class="h4">ルーム一覧</p>
+      <div class="mt-4">
+        <table class="table" style="table-layout:fixed;">
+          <thead>
+            <tr>
+              <th>ID.オーナー</th>
+              <th>ID.メンバー</th>
+              <th></th>
+            </tr>
+          </thead>
+          <% @rooms.each do |room| %>
+            <tr>
+              <td><%= room.owner_id %>.<%= room.owner.nickname %></td>
+              <td><%= room.member_id %>.<%= room.member.nickname %></td>
+              <td><%= link_to "詳細ページ", admin_room_path(room) %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

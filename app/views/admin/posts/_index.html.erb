@@ -1,0 +1,30 @@
+<table class="table" style="table-layout:fixed;">
+  <thead>
+    <tr>
+      <th>ID.投稿者</th>
+      <th>タイトル</th>
+      <th>タグ</th>
+      <th>いいね</th>
+      <th>コメント数</th>
+    </tr>
+  </thead>
+  <% posts.each do |post| %>
+    <tr>
+      <td><%= post.user.id %>.<%= post.user.nickname %></td>
+      <td>
+        <%= link_to admin_post_path(post) do %>
+          <%= post.title %>
+        <% end %>
+      </td>
+      <td>
+        <% post.tags.each do |tag| %>
+          <li class="list-unstyled">
+            <%= tag.name %>
+          </li>
+        <% end %>
+      </td>
+      <td><%= post.favorites.count %>件</td>
+      <td><%= post.comments.count %>件</td>
+    </tr>
+  <% end %>
+</table>
