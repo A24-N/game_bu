@@ -1,0 +1,49 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12 offset-1 mt-2">
+      <div class="row">
+        <div class="col-4">
+          <p class="h4">投稿詳細</p>
+        </div>
+        <div class="col-4">
+          <%= link_to "投稿削除", admin_post_path(params[:id]), method: :delete, class: 'btn btn-danger btn-sm',"data-confirm" => "本当に消しますか？" %></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col offset-1">
+          <div>タイトル:<%= @post.title %></div>
+          <div>投稿者:<%= @post.user.nickname %></div>
+          <div>タグ:
+            <% @tags.each do |tag| %>
+              <%= tag.name %>
+            <% end %>
+          </div>
+          <div>本文:<br>
+                <%= @post.body %>
+          </div>
+        </div>
+      </div>
+      <p class="h4 mt-3">コメント</p>
+      <div class="row">
+        <div class="col offset-1 comment">
+          <table>
+            <tr>
+              <th>書込者</th>
+            </tr>
+            <% @post.comments.each do |comment| %>
+              <tr>
+                <td>
+                  <%= comment.user.nickname %>
+                </td>
+                <td><%= safe_join(comment.comment.split("\n"),tag(:br)) %></td>
+                <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+                <td><%= link_to '削除', post_comment_path(comment.post_id, comment), method: :delete, class: 'btn btn-danger btn-sm', "data-confirm" => "本当に消しますか？", remote: true %> </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

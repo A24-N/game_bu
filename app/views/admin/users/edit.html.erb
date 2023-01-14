@@ -1,9 +1,9 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-11 offset-1 mt-2">
-      <p class="h4">会員情報編集ページ</p>
+      <p class="h4"><%= @user.nickname %>の会員情報編集ページ</p>
 
-      <%= form_with model: @user do |f| %>
+      <%= form_with model: @user, url: admin_user_path do |f| %>
         <div class="field col-6 mt-3">
           <%= f.label :ニックネーム, class: 'font-weight-bold' %>
           <%= f.text_field :nickname, autofocus: true, class: 'form-control' %>
@@ -12,11 +12,6 @@
         <div class="field col-6 mt-3">
           <%= f.label :メールアドレス, class: 'font-weight-bold' %>
           <%= f.text_field :email, class: 'form-control' %>
-        </div>
-
-        <div class="field col-6 mt-3">
-          <%= f.label :プロフィール画像, class: 'font-weight-bold' %><br>
-          <%= f.file_field :image, accept: "image/*"%>
         </div>
 
         <div class="field col-6 mt-3">
@@ -37,11 +32,17 @@
           </div>
         </div>
 
+        <div class="field col-6 mt-3">
+            <%= f.label :会員ステータス　, class: 'font-weight-bold' %>
+            <%= f.radio_button :is_user_deleted, :false %>
+            <%= f.label :is_user_deleted, '可動', value: false %>
+            <%= f.radio_button :is_user_deleted, :true %>
+            <%= f.label :is_user_deleted, '停止', value: true %>
+          </div>
+
+
         <div class="action col-6 mt-3">
           <div class="row">
-            <div class="col-4">
-              <%= link_to "退会", user_unsubscribe_path(current_user), class: 'btn btn-outline-danger btn-sm' %>
-            </div>
             <div class="col-4 offset-4 text-right">
               <%= f.submit "更新", class: 'btn btn-outline-success' %>
             </div>
@@ -49,6 +50,7 @@
         </div>
 
       <% end %>
+
     </div>
   </div>
 </div>

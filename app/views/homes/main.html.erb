@@ -1,0 +1,29 @@
+<%= stylesheet_link_tag "homes", :media => "all" %>
+<body class="main_image">
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-6 logo ">
+        <div><%= image_tag 'logo_clear.png' %></div>
+        <p class="logo-font">
+          本サイトは主に格闘ゲームを取り扱う<br>
+          ゲーム専門のコミュニティサイトです。<br>
+          「対戦相手の募集」「自身の近況を投稿」<br>
+          などを行うことができます。
+        </p>
+      </div>
+      <div class="col-6 login">
+        <div>
+          <div class="btn btn01">
+            <%= link_to "ログイン", new_user_session_path %>
+          </div>
+          <div class="btn btn02">
+            <%= link_to "新規登録", new_user_registration_path %>
+            </div>
+          <div class="btn btn03">
+            <%= link_to "ゲストログイン", root_path %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

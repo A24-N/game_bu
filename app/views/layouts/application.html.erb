@@ -14,8 +14,14 @@
     <%= render 'layouts/header' %>
     <main>
       <div class="text-right">
-        <%= render 'searches/search_form' %>
-        <%= render 'searches/tag_search_form' %>
+        <%= content_tag(:div, flash[:alert], class: "alert alert-danger text-left") if flash[:alert] %>
+        <%= content_tag(:div, flash[:notice], class: "alert alert-success text-left") if flash[:notice] %>
+        <% if user_signed_in? %>
+          <% unless current_user.admin_status %>
+            <%= render 'searches/search_form' %>
+            <%= render 'searches/tag_search_form' %>
+          <% end %>
+        <% end %>
       </div>
       <%= yield %>
     </main>

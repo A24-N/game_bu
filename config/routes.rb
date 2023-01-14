@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   root to: "homes#top"
+  get 'main' => "homes#main"
   get 'about' => "homes#about"
 
   resources :users, only: [:show, :edit, :update, :destroy] do
@@ -24,4 +25,13 @@ Rails.application.routes.draw do
 
   patch 'matches/matching' => "matches#matching"
   get "search" => "searches#search"
+
+  namespace :admin do
+    root to: 'homes#top'
+
+    resources :rooms, only: [:index, :show, :destroy]
+    resources :posts, only: [:index, :show, :destroy]
+    resources :users, only: [:index, :show, :edit, :update, :destroy]
+    resources :introduces, only: [:index, :show, :destroy]
+  end
 end
