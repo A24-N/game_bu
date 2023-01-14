@@ -28,5 +28,12 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'homes#top'
+
+    resources :rooms, only: [:index]
+    resources :posts, only: [:index]
+    resources :users, only: [:index, :show, :edit, :update, :destroy] do
+      patch 'status_change' => "users#status_change"
+    end
+    resources :introduces, only: [:index]
   end
 end
