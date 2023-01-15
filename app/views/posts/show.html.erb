@@ -13,7 +13,7 @@
                 <%= @post.user.nickname %>
               <% end %>
             </th>
-            <th class="align-middle"><%= render 'favorites/favorite_btn', post: @post %></th>
+            <th class="align-middle" id="favorite_buttons_<%= @post.id %>"><%= render 'favorites/favorite_btn', post: @post %></th>
             <% if @post.user_id == current_user.id %>
               <div class="text-right">
                 <th class="align-bottom"><%= link_to "投稿を編集", edit_post_path(params[:id]), class: 'btn btn-success btn-sm' %></th>
