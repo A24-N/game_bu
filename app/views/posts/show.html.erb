@@ -13,7 +13,7 @@
                 <%= @post.user.nickname %>
               <% end %>
             </th>
-            <th class="align-middle"><%= render 'favorites/favorite_btn', post: @post %></th>
+            <th class="align-middle" id="favorite_buttons_<%= @post.id %>"><%= render 'favorites/favorite_btn', post: @post %></th>
             <% if @post.user_id == current_user.id %>
               <div class="text-right">
                 <th class="align-bottom"><%= link_to "投稿を編集", edit_post_path(params[:id]), class: 'btn btn-success btn-sm' %></th>
@@ -37,30 +37,13 @@
       </div>
 
       <p class="h4 mt-3">コメント</p>
-      <div class="comment">
-        <table>
-          <% @post.comments.each do |comment| %>
-            <tr>
-              <td>
-                <%= link_to(@post.user) do %>
-                  <%= image_tag comment.user.get_image(50,50) %><br>
-                  <%= comment.user.nickname %>
-                <% end %>
-              </td>
-              <td><%= safe_join(comment.comment.split("\n"),tag(:br)) %></td>
-              <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
-              <% if current_user.id == comment.user_id %>
-              <td><%= link_to '削除', post_comment_path(comment.post_id, comment), method: :delete, class: 'btn btn-danger btn-sm', "data-confirm" => "本当に消しますか？", remote: true %> </td>
-              <% end %>
-            </tr>
-          <% end %>
-        </table>
+      <div class="comment" id="posts_comment_<%= @post.id %>_list">
+        <%= render 'comments/comment_list', post: @post %>
       </div>
 
-      <%= form_with model: [@post, @comment], local: false do |f| %>
-        <%= f.text_area :comment, rows:5, style: "width:100%", placeholder: "コメントをここに", class: "mt-3", value: "" %><br>
-        <%= f.submit "送信する" %>
-      <% end %>
+      <div class="comment" id="posts_comment_<%= @post.id %>">
+        <%= render 'comments/comment', post: @post, comment: @comment %>
+      </div>
     </div>
   </div>
 </div>

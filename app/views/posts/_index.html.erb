@@ -25,7 +25,9 @@
           </li>
         <% end %>
       </td>
-      <td><%= render 'favorites/favorite_btn', post: post %></td>
+      <td id="favorite_buttons_<%= post.id %>">
+        <%= render 'favorites/favorite_btn', post: post %>
+      </td>
       <td><%= post.comments.count %>件</td>
     </tr>
   <% end %>

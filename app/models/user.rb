@@ -9,6 +9,7 @@ class User < ApplicationRecord
 # マッチング機能
   has_many :messages, dependent: :destroy
   has_many :matches, dependent: :destroy
+  has_many :rooms, through: :matches
 #ルームで各ユーザー情報を表示
   has_many :owner, through: :matches, source: :owner_id
   has_many :member, through: :matches, source: :member_id
