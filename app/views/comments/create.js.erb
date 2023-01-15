@@ -1,0 +1,2 @@
+$('#posts_comment_<%= @post.id %>').html("<%= j(render "comments/comment", post: @post, comment: @comment) %>");
+$('#posts_comment_<%= @post.id %>_list').html("<%= j(render "comments/comment_list", post: @post) %>");

@@ -4,7 +4,6 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-      redirect_to request.referer
     else
       @comments = @post.comments
       redirect_to request.referer
@@ -14,7 +13,6 @@ class CommentsController < ApplicationController
   def destroy
     @post = Post.find(params[:post_id])
     Comment.find(params[:id]).destroy
-    redirect_to request.referer
   end
 
   private
