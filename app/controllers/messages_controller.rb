@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
   def create
-    # @room = Room.where(owner_id: current_user).or(Room.where(member_id: current_user))
     @room = Room.find_by(owner_id: current_user)
     if @room == nil
       @room = Room.find_by(member_id: current_user)

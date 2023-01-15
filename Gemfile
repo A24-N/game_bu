@@ -62,7 +62,6 @@ gem 'pry-rails'
 gem 'rails-i18n'
 gem 'cancancan'
 gem 'dotenv-rails'
-gem 'jquery-rails'
 group :production do
   gem 'mysql2'
 end
