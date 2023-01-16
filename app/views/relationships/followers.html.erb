@@ -1,7 +1,8 @@
 <div class="container mt-4">
   <div class="row">
-    <%= render 'users/info', user: current_user %>
-
+    <div class="col-3 sticky-top side m-2">
+      <%= render 'users/info', user: current_user %>
+    </div>
     <div class="col-8">
       <p class="h4"><%= @user.nickname %>さんのフォロワー一覧</p>
       <%= render 'follow', users: @users %>

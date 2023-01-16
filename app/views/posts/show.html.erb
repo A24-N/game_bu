@@ -1,9 +1,13 @@
-<div class="container mt-4">
+<div class="container">
   <div class="row">
-    <%= render 'users/info', user: current_user %>
+    <div class="col-11 offset-1 text-center">
+      <h2 class="heading mt-4"><%= @post.title %></h2>
+    </div>
+    <div class="col-3 sticky-top side m-2">
+      <%= render 'users/info', user: current_user %>
+    </div>
 
     <div class="col-8">
-      <p class="h4"><%= @post.title %></p>
       <div class="col offset-1">
         <table class="table table-borderless">
           <tr>
@@ -28,10 +32,12 @@
             <td colspan="5">
               <i class="fas fa-tag"></i>
               <% @tags.each do |tag| %>
-              <!--pathを修正-->
-                <%= link_to tag.name, root_path(name: tag.name) %>
+                <%= link_to tag.name, search_path(range: "Tag", word: tag.name) %>
               <% end %>
             </td>
+          </tr>
+          <tr class="text-right">
+            <td colspan="5">投稿日:<%= @post.created_at.strftime('%m月%d日%H:%M') %></td>
           </tr>
         </table>
       </div>

@@ -3,8 +3,9 @@
     <div class="col-11 offset-1">
       <h2 class="heading mt-4">ユーザーページ!!</h2>
     </div>
-    <%= render 'info', user: current_user %>
-
+    <div class="col-3 sticky-top side m-2">
+      <%= render 'info', user: current_user %>
+    </div>
     <div class="col-8">
       <div class="col-8 offset-1">
         <p class="h4 mt-4"><%= @user.nickname %>さんの詳細情報</p>
