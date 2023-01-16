@@ -24,6 +24,12 @@ html,body {
   height: 100%;
 }
 
+/*my-info(サイドバー)*/
+.side {
+  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.5);
+}
+
+
 /* Aboutページ*/
 .about_image {
   height: 600px;
