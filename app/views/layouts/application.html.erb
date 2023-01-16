@@ -5,25 +5,21 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
-    <main>
-      <div class="text-right">
-        <%= content_tag(:div, flash[:alert], class: "alert alert-danger text-left") if flash[:alert] %>
-        <%= content_tag(:div, flash[:notice], class: "alert alert-success text-left") if flash[:notice] %>
-        <% if user_signed_in? %>
-          <% unless current_user.admin_status %>
-            <%= render 'searches/search_form' %>
-            <%= render 'searches/tag_search_form' %>
-          <% end %>
-        <% end %>
-      </div>
-      <%= yield %>
-    </main>
+    <div class="whole">
+      <%= render 'layouts/header' %>
+      <main>
+        <div class="text-right">
+          <%= content_tag(:div, flash[:alert], class: "alert alert-danger text-left") if flash[:alert] %>
+          <%= content_tag(:div, flash[:notice], class: "alert alert-success text-left") if flash[:notice] %>
+        </div>
+        <%= yield %>
+      </main>
+      <%= render 'layouts/footer' %>
+    </div>
   </body>
 </html>

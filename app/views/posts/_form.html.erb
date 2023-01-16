@@ -1,5 +1,5 @@
 <%= form_with model: npost do |f| %>
-  <div class="field col-6">
+  <div class="field col-10">
     <%= f.label :title %>
     <%= f.text_field :title, class:'form-control' %>
   </div>
@@ -14,7 +14,7 @@
     <%= f.text_field :tag, value: @tag_list, class: 'form-control' %>
   </div>
 
-  <div class="action text-right">
+  <div class="action text-right col-10 mt-2">
     <%= f.submit "投稿", class:'btn btn-success' %>
   </div>
 <% end %>

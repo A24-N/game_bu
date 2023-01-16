@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
     @npost = Post.new
-    @posts = Post.all
+    @posts = Post.order("created_at DESC").page(params[:page]).per(6)
   end
 
   def create
@@ -10,7 +10,9 @@ class PostsController < ApplicationController
     tag_list = params[:post][:tag].split(',')
     if @post.save
       @post.save_tag(tag_list)
-      redirect_to post_path(@post.id)
+      redirect_to post_path(@post.id), notice: "投稿しました:)"
+    else
+      redirect_to request.referer, alert: "投稿に失敗しました:<"
     end
   end
 

@@ -1,8 +1,10 @@
-<div class="container mt-4">
+<div class="container">
   <div class="row">
-    <div class="col-11 offset-1 mt-2">
-      <p class="h4">会員情報編集ページ</p>
+    <div class="col-11 offset-1">
+      <h2 class="heading mt-4">会員情報編集ページ</h2>
+    </div>
 
+    <div class="col">
       <%= form_with model: @user do |f| %>
         <div class="field col-6 mt-3">
           <%= f.label :ニックネーム, class: 'font-weight-bold' %>

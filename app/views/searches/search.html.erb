@@ -1,14 +1,16 @@
 <div class="container mt-4">
   <div class="row">
-    <%= render 'users/info', user: current_user %>
+    <div class="col-3 sticky-top side m-2">
+      <%= render 'users/info', user: current_user %>
+    </div>
     <div class="col-8">
-      <p class="h4">"<%= @range %>" "<%= @word %>"の検索結果</p>
+      <p class="h4">"<%= @word %>"の検索結果</p>
       <% if @range == "User" %>
         <%= render 'users/index', users: @users %>
         <% if @users.blank? %>
           <p>検索結果はありません。</p>
         <% end %>
-      <% elsif @range == "Post" %>
+      <% elsif @range == "Post" || @range == "UserPosts" %>
         <%= render 'posts/index', posts: @posts %>
         <% if @posts.blank? %>
           <p>検索結果はありません。</p>

@@ -1,11 +1,14 @@
-<div class="container mt-4">
+<div class="container">
   <div class="row">
-    <%= render 'info', user: current_user %>
-
+    <div class="col-11 offset-1">
+      <h2 class="heading mt-4">ユーザーページ!!</h2>
+    </div>
+    <div class="col-3 sticky-top side m-2">
+      <%= render 'info', user: current_user %>
+    </div>
     <div class="col-8">
-      <p class="h4">マイページ</p>
       <div class="col-8 offset-1">
-        <p class="h5">my-info詳細</p>
+        <p class="h4 mt-4"><%= @user.nickname %>さんの詳細情報</p>
         <table class="table table-borderless">
           <tr>
             <td class="text-center"><%= image_tag @user.get_image(100,100) %></td>
@@ -37,11 +40,17 @@
         </table>
       </div>
 
-      <div class="col-8 offset-4">
-        <p class="h5">投稿一覧</p>
-        <table class="table table-borderless">
-        </table>
-      </div>
+        <h5>最新の投稿</h5>
+        <% if @posts.blank? %>
+          <P>まだ投稿していません。</P>
+        <% else %>
+          <%= link_to search_path(range: "UserPosts", word: @user.nickname, id: @user.id) do %>
+            <%= @user.nickname %>さんの投稿一覧はこちら!!
+          <% end %>
+          <table class="table table-borderless">
+            <%= render 'posts/index', posts: @posts %>
+          </table>
+        <% end %>
     </div>
   </div>
 </div>

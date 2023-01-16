@@ -23,19 +23,21 @@ class MatchesController < ApplicationController
 
 #マッチング後にルームを作成
   def matching
-    @match = Match.new
-    @match.matching_status = 2
-    @match.user_id = current_user.id
-    @match.save
-
-    @owner_match = Match.find_by(user_id: params[:user_id])
-    @owner_match.matching_status = 2
-    @owner_match.update(params.permit(:matching_status))
-
     @room = Room.new
     @room.owner_id = params[:user_id]
     @room.member_id = current_user.id
     @room.save
+
+    @match = Match.new
+    @match.matching_status = 2
+    @match.user_id = current_user.id
+    @match.room_id = @room.id
+    @match.save
+
+    @owner_match = Match.find_by(user_id: params[:user_id])
+    @owner_match.matching_status = 2
+    @owner_match.room_id = @room.id
+    @owner_match.update(params.permit(:matching_status))
 
     redirect_to room_path(@room)
   end
