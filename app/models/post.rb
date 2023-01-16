@@ -5,6 +5,9 @@ class Post < ApplicationRecord
   has_many :post_tag_relations, dependent: :destroy
   has_many :tags, through: :post_tag_relations
   belongs_to :user
+  
+  validates :title,presence:true
+  validates :body,presence:true,length:{maximum:200}
 
 #いいね有無の判断
   def favorited_by?(user)
@@ -27,16 +30,5 @@ class Post < ApplicationRecord
       new_post_tag = Tag.find_or_create_by(name: new)
       self.tags << new_post_tag
    end
-  end
-
-#検索方法分岐
-  def self.looks(search, word)
-    if search == "perfect_match"
-      @post = Post.where("title LIKE?", "#{word}")
-    elsif search == "partial_match"
-      @post = Post.where("title LIKE?", "%#{word}%")
-    else
-      @post =Post.all
-    end
   end
 end

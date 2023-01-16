@@ -8,12 +8,12 @@ class ApplicationController < ActionController::Base
     if current_user.admin_status?
       admin_root_path
     else
-      root_path
+      main_path
     end
   end
 
   def after_sign_out_path_for(resource)
-    main_path
+    root_path
   end
 
   def configure_permitted_parameters

@@ -10,7 +10,9 @@ class PostsController < ApplicationController
     tag_list = params[:post][:tag].split(',')
     if @post.save
       @post.save_tag(tag_list)
-      redirect_to post_path(@post.id)
+      redirect_to post_path(@post.id), notice: "投稿しました:)"
+    else
+      redirect_to request.referer, alert: "投稿に失敗しました:<"
     end
   end
 

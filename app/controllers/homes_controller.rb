@@ -1,12 +1,13 @@
 class HomesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:main, :about]
+  skip_before_action :authenticate_user!, only: [:top, :about]
 
   def top
-    @npost = Post.new
-    @posts = Post.order(created_at: "DESC").limit(3)
   end
 
   def main
+    @npost = Post.new
+    @posts = Post.order(created_at: "DESC").limit(3)
+    @match = Match.find_by(user_id: current_user.id)
   end
 
   def about
