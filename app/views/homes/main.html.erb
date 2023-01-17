@@ -20,7 +20,7 @@
     <div class="col-11 offset-1 mt-2 match">
       <h2>只今のマッチング状況</h2>
       <% if @match&.matching_status == "in_action" %>
-        <%= link_to "マッチング中(ルームへ)", room_path(@match.room_id), class: 'btn btn-match' %>
+        <%= link_to "マッチング中(ルームへ)", room_path(@match.room_id), class: 'btn btn-match', data: { 'turbolinks': false } %>
       <% elsif @match&.matching_status == "stand_by" %>
         <%= link_to "マッチング待機中", matches_path, class: 'btn btn-match' %>
       <% else %>
