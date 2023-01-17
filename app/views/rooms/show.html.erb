@@ -24,8 +24,8 @@
     </div>
 
     <div class="col-8">
-      <div id='message'>
-        <%= render 'messages/message', room: @room, owner: @owner, member: @member %>
+      <div id='messages' data-room_id="<%= @room.id %>">
+        <%= render @messages, room: @room, owner: @owner, member: @member %>
       </div>
       <%= form_with model: @message do |f| %>
         <%= f.text_area :chat, style: "width:100%", placeholder: "コメントをここに", class: "mt-3", value: "" %><br>
@@ -33,7 +33,11 @@
         <%= f.hidden_field :user_id, value: current_user.id %>
         <%= f.submit "送信する" %>
       <% end %>
+      <%= label_tag :content, 'Say something:' %>
+      <%= text_field_tag :content, nil, data: { behavior: 'room_speaker' } %>
     </div>
+
+
 
     <div class="col-2 text-center font-weight-bold">
       <%= link_to user_path(@member.id) do %>
