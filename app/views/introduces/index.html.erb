@@ -1,33 +1,33 @@
-<div class="container mt-4">
+<div class="container">
   <div class="row">
+    <div class="col-11 offset-1">
+      <h2 class="heading mt-4"><%= @user.nickname %>さんの紹介文</h2>
+    </div>
     <div class="col-3 sticky-top side m-2">
       <%= render 'users/info', user: current_user %>
     </div>
 
     <div class="col-8">
-      <p class="h4"><%= @user.nickname %>さんの紹介文</p>
-      <table class="table">
         <% @introduces.each do |introduce| %>
-        <thead>
-          <tr>
-            <th><%= image_tag introduce.introduce_from_user.get_image(50,50) %></th>
-            <th><%= introduce.introduce_from_user.nickname %></th>
+          <div class="row">
+            <div class="col">
+              <table class="m-3">
+              <td><%= image_tag introduce.introduce_from_user.get_image(50,50) %></td>
+              <td><%= introduce.introduce_from_user.nickname %></td>
+              </table>
+            </div>
             <% if introduce.introduce_from_user_id == current_user.id %>
-              <th><%= link_to "編集", edit_user_introduce_path(@user, introduce) %></th>
-              <th><%= link_to "削除", user_introduce_path(@user, introduce), method: :delete %></th>
-            <% else %>
-              <th></th>
-              <th></th>
+              <div class="col">
+                <%= link_to "編集", edit_user_introduce_path(@user, introduce) %>
+                <%= link_to "削除", user_introduce_path(@user, introduce), method: :delete %>
+              </div>
             <% end %>
-          </tr>
-        </thead>
-        <tbody>
+          </div>
+
           <tr>
             <td colspan=4><%= safe_join(introduce.body.split("\n"),tag(:br)) %></td>
           </tr>
         <% end %>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>
