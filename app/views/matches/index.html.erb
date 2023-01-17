@@ -9,7 +9,7 @@
         <% if @match_status&.matching_status == "stand_by" %>
           <%= link_to "マッチング待機解除", match_path(@match_status), method: :delete, class: 'btn btn-outline-success' %>
         <% elsif @match_status&.matching_status == "in_action" %>
-          <%= link_to "マッチング中", room_path(@room.ids), class: 'btn btn-outline-success' %>
+          <%= link_to "マッチング中", room_path(@room.ids), class: 'btn btn-outline-success', data: { 'turbolinks': false } %>
         <% else %>
           <%= form_with model: @match do |f| %>
             <%= f.hidden_field :matching_status, value: "stand_by" %>
