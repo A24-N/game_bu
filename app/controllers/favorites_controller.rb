@@ -13,6 +13,6 @@ class FavoritesController < ApplicationController
 
   def favorite
     favorites = Favorite.where(user_id: current_user.id).pluck(:post_id)
-    @posts = Post.find(favorites)
+    @posts = Kaminari.paginate_array(Post.find(favorites)).page(params[:page]).per(6)
   end
 end
