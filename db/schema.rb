@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
     t.integer "matching_status", default: 0, null: false
     t.string "room_comment"
     t.string "game_name"
+    t.string "game_hard"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_matches_on_room_id"

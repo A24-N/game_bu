@@ -235,6 +235,50 @@ background-color: #32CD32;
   color: #FFFAFA;
 }
 
+/*紹介文吹き出し*/
+.introduce_box {
+	position: relative;
+	background: #f0f0f0;
+	border: 1px solid #373645;
+	border-radius: 10px;
+}
+.introduce_box:after, .introduce_box:before {
+	bottom: 100%;
+	left: 40px;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.introduce_box:after {
+	border-color: rgba(240, 240, 240, 0);
+	border-bottom-color: #f0f0f0;
+	border-width: 5px;
+	margin-left: -5px;
+}
+.introduce_box:before {
+	border-color: rgba(55, 54, 69, 0);
+	border-bottom-color: #373645;
+	border-width: 6px;
+	margin-left: -6px;
+}
+
+/*マッチングタグ風表示*/
+.tag {
+    margin: 5px 0px;
+    padding: 0.5rem;
+    background: #f7f7f7;
+    border-left: solid 6px #58ad5a;
+    color: #696969;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
+}
+.tag p {
+  margin: 2px;
+}
+
 /*フッター*/
 footer{
   background-color: #C0C0C0;

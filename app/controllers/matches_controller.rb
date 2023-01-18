@@ -2,8 +2,14 @@ class MatchesController < ApplicationController
   def index
     @match = Match.new
     @match_status = Match.find_by(user_id: current_user.id)
-    @user_stand_by = Match.where(matching_status: "stand_by")
     @room = Room.where(owner_id: current_user).or(Room.where(member_id: current_user))
+    @search_gamename = params[:search_gamename]
+    @search_gamehard = params[:search_gamehard]
+    if @search_gamename.present? or @search_gamehard.present?
+      @stand_by_users = Match.where(matching_status: "stand_by").or(Match.where(game_name: @search_gamename)).or(Match.where(game_hard: @search_gamehard))
+    else
+      @stand_by_users = Match.where(matching_status: "stand_by")
+    end
   end
 
 #マッチングステータスをstand_byに変更
