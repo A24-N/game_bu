@@ -13,9 +13,11 @@
         <h4>マッチング</h4>
         <!--NoMethodErrorを防ぐために&を活用-->
         <% if @match_status&.matching_status == "stand_by" %>
-          <%= link_to "マッチング待機解除", match_path(@match_status), method: :delete, class: 'btn btn-outline-success' %>
+          <div class="action text-center mt-5 ">
+            <%= link_to "マッチング待機解除", match_path(@match_status), method: :delete, class: 'btn btn-match' %>
+          </div>
         <% elsif @match_status&.matching_status == "in_action" %>
-          <%= link_to "マッチング中", room_path(@room.ids), class: 'btn btn-outline-success', data: { 'turbolinks': false } %>
+          <%= link_to "マッチング中", room_path(@room.ids), class: 'btn btn-match', data: { 'turbolinks': false } %>
         <% else %>
           <%= form_with model: @match do |f| %>
             <%= f.hidden_field :matching_status, value: "stand_by" %>
@@ -25,7 +27,7 @@
             </div>
             <div class="field">
               <%= f.label :"ハード名:" %>
-              <%= f.text_field :game_name, placeholder: "ハード名", class: 'form-control' %>
+              <%= f.text_field :game_hard, placeholder: "ハード名", class: 'form-control' %>
             </div>
             <div class="field">
               <%= f.label :"ルームコメント:" %>
@@ -58,11 +60,17 @@
     <div class="col-12">
       <% @stand_by_users.each do |match| %>
         <div class="match_<%= match.id %> tag">
-          <table>
+          <table style="width:100%;">
             <td style="width:80px;"><%= image_tag match.user.get_image(50,50) %></td>
-            <td><strong><%= match.user.nickname %></strong></td>
+            <td><strong>
+              <%= link_to user_path(match.user.id) do %>
+                <%= match.user.nickname %>
+              <% end %>
+            </strong></td>
             <% if match.user_id != current_user.id %>
-              <td><%= link_to "マッチング", matches_matching_path(user_id: match.user.id), method: :patch, class: 'btn btn-info' %></td>
+              <td class="text-right"><%= link_to "マッチング", matches_matching_path(user_id: match.user.id), method: :patch, class: 'btn btn-info' %></td>
+            <% else %>
+              <td class="text-right"><p>自分</p></td>
             <% end %>
           </table>
           <p><strong>ゲーム名：</strong><%= match.game_name %></p>
