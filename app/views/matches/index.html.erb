@@ -17,7 +17,9 @@
             <%= link_to "マッチング待機解除", match_path(@match_status), method: :delete, class: 'btn btn-match' %>
           </div>
         <% elsif @match_status&.matching_status == "in_action" %>
-          <%= link_to "マッチング中", room_path(@room.ids), class: 'btn btn-match', data: { 'turbolinks': false } %>
+          <div class="action text-center mt-5 ">
+            <%= link_to "マッチング中", room_path(@room.ids), class: 'btn btn-match', data: { 'turbolinks': false } %>
+          </div>
         <% else %>
           <%= form_with model: @match do |f| %>
             <%= f.hidden_field :matching_status, value: "stand_by" %>

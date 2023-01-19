@@ -236,13 +236,13 @@ background-color: #32CD32;
 }
 
 /*紹介文吹き出し*/
-.introduce_box {
+.introduce-box {
 	position: relative;
 	background: #f0f0f0;
 	border: 1px solid #373645;
 	border-radius: 10px;
 }
-.introduce_box:after, .introduce_box:before {
+.introduce-box:after, .introduce-box:before {
 	bottom: 100%;
 	left: 40px;
 	border: solid transparent;
@@ -253,13 +253,13 @@ background-color: #32CD32;
 	pointer-events: none;
 }
 
-.introduce_box:after {
+.introduce-box:after {
 	border-color: rgba(240, 240, 240, 0);
 	border-bottom-color: #f0f0f0;
 	border-width: 5px;
 	margin-left: -5px;
 }
-.introduce_box:before {
+.introduce-box:before {
 	border-color: rgba(55, 54, 69, 0);
 	border-bottom-color: #373645;
 	border-width: 6px;
@@ -268,15 +268,95 @@ background-color: #32CD32;
 
 /*マッチングタグ風表示*/
 .tag {
-    margin: 5px 0px;
-    padding: 0.5rem;
-    background: #f7f7f7;
-    border-left: solid 6px #58ad5a;
-    color: #696969;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
+  margin: 5px 0px;
+  padding: 0.5rem;
+  background: #f7f7f7;
+  border-left: solid 6px #58ad5a;
+  color: #696969;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
 }
 .tag p {
   margin: 2px;
+}
+
+/*ルーム情報*/
+.room-info {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.22);
+  border-top:solid 5px #F0FFFF;
+  border-bottom:solid 5px #F0FFFF;
+  background-color: #FFFAFA;
+}
+.room-info::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: red;
+  border-radius: 50%;
+
+}
+
+/*ルームチャット*/
+.room-chat {
+  background-color: #87CEFA;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.22);
+  border-radius: 10px;
+}
+
+.fukidashi {
+  width: 100%;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.says {
+  display: inline-block;
+  position: relative;
+  margin: 0 0 0 15px;
+  padding: 8px;
+  max-width: 250px;
+  border-radius: 12px;
+  background: #edf1ee;
+}
+.says::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  left: -19px;
+  border: 8px solid transparent;
+  border-right: 18px solid #edf1ee;
+  -webkit-transform: rotate(35deg);
+  transform: rotate(35deg);
+}
+.says p {
+  margin: 0;
+  padding: 0;
+}
+
+.my-chat {
+  margin-top: 10px;
+}
+.my-chat p {
+  display: inline-block;
+  position: relative;
+  margin: 0px;
+  padding: 8px;
+  max-width: 250px;
+  border-radius: 12px;
+  background: #30e852;
+  font-size: 15px;
+}
+.my-chat p::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: -19px;
+  border: 8px solid transparent;
+  border-left: 18px solid #30e852;
+  -webkit-transform: rotate(-35deg);
+  transform: rotate(-35deg);
+}
+.time p {
+  margin: 0px;
 }
 
 /*フッター*/

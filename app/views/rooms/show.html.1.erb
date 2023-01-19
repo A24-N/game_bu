@@ -20,30 +20,25 @@
   <div class="row">
     <h4 class="col-12 text-center">チャット</h4>
     <div class="col-2 text-center font-weight-bold">
-      <% if @owner.id != current_user.id %>
-        <%= link_to user_path(@owner.id) do %>
-          <%= image_tag @owner.get_image(100,100) %><br>
-          <%= @owner.nickname %>
-        <% end %>
-      <% else %>
-        <%= link_to user_path(@member.id) do %>
-          <%= image_tag @member.get_image(100,100) %><br>
-          <%= @member.nickname %>
-        <% end %>
+      <%= link_to user_path(@owner.id) do %>
+        <%= image_tag @owner.get_image(100,100) %><br>
+        <%= @owner.nickname %>
       <% end %>
     </div>
 
     <div class="col-8 room-chat">
       <div id='messages' data-room_id="<%= @room.id %>">
-        <%= render @messages %>
+        <%= render @messages, room: @room, owner: @owner, member: @member %>
       </div>
       <%= text_field_tag :content, nil, data: { behavior: 'room_speaker' }, placeholder: "Enterで送信", class: 'form-control mb-2' %>
     </div>
 
+
+
     <div class="col-2 text-center font-weight-bold">
-      <%= link_to user_path(current_user.id) do %>
-        <%= image_tag current_user.get_image(100,100) %><br>
-        <%= current_user.nickname %>
+      <%= link_to user_path(@member.id) do %>
+        <%= image_tag @member.get_image(100,100) %><br>
+        <%= @member.nickname %>
       <% end %>
     </div>
   </div>
