@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+
   def index
     @npost = Post.new
     @posts = Post.order("created_at DESC").page(params[:page]).per(6)
@@ -44,8 +46,14 @@ class PostsController < ApplicationController
   end
 
   private
-
   def post_params
     params.require(:post).permit(:title, :body)
+  end
+
+  def ensure_correct_user
+    @post = Post.find(params[:id])
+    unless @post.user == current_user
+      redirect_to main_path, alert: "アクセス権限がありません:<"
+    end
   end
 end

@@ -1,4 +1,6 @@
 class RoomsController < ApplicationController
+  before_action :room_user_check, only: [:show, :destroy]
+
   def show
     @room = Room.find(params[:id])
     @owner = @room.owner
@@ -22,6 +24,11 @@ class RoomsController < ApplicationController
   end
 
   private
-
+  def room_user_check
+    @room = Room.find(params[:id])
+    unless @room.owner_id == current_user.id or @room.member_id == current_user.id
+      redirect_to main_path, alert: "アクセス権限がありません:<"
+    end
+  end
 
 end

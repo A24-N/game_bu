@@ -11,26 +11,26 @@
       <% if @introduces.blank? %>
         <p class="mt-3">紹介文はまだありません</p>
       <% end %>
-        <% @introduces.each do |introduce| %>
-          <div class="row">
-            <div class="col">
-              <table class="m-3">
-              <td><%= image_tag introduce.introduce_from_user.get_image(50,50) %></td>
-              <td><%= introduce.introduce_from_user.nickname %></td>
-              </table>
+      <% @introduces.each do |introduce| %>
+        <div class="row">
+          <div class="col">
+            <table class="m-3">
+            <td><%= image_tag introduce.introduce_from_user.get_image(50,50) %></td>
+            <td><%= introduce.introduce_from_user.nickname %></td>
+            </table>
+          </div>
+          <% if introduce.introduce_from_user_id == current_user.id %>
+            <div class="col d-flex align-items-center">
+              <%= link_to "編集", edit_user_introduce_path(@user, introduce), class: 'btn btn-success mx-2' %>
+              <%= link_to "削除", user_introduce_path(@user, introduce), method: :delete, class: 'btn btn-danger mx-2' %>
             </div>
-            <% if introduce.introduce_from_user_id == current_user.id %>
-              <div class="col d-flex align-items-center">
-                <%= link_to "編集", edit_user_introduce_path(@user, introduce), class: 'btn btn-success mx-2' %>
-                <%= link_to "削除", user_introduce_path(@user, introduce), method: :delete, class: 'btn btn-danger mx-2' %>
-              </div>
-            <% end %>
-          </div>
-
-          <div class="introduce-box">
-            <p class="m-2"><%= safe_join(introduce.body.split("\n"),tag(:br)) %></p>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
+        <div class="introduce-box">
+          <p class="m-2"><%= safe_join(introduce.body.split("\n"),tag(:br)) %></p>
+        </div>
+      <% end %>
+      <%= paginate @introduces %>
     </div>
   </div>
 </div>

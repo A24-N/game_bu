@@ -1,20 +1,25 @@
-<div class="container mt-4">
+<div class="container">
   <div class="row">
-    <div class="col-11 offset-1 mt-2">
-      <p class="h4"><%= user.nickname %>さんの紹介文を<%= obj %></p>
+    <div class="col-11 offset-1">
+      <h2 class="heading mt-4"><%= user.nickname %>さんの紹介文を<%= obj %></h2>
     </div>
     <div class="col-11 offset-1 mt-2">
       <p>！注意点！</p>
+      <p>相手を傷つけるような言葉遣い・誹謗中傷等は控えましょう。<br>
+         余りにも酷い内容の場合には管理人の一存で削除させていただきます。
+      </p>
     </div>
   </div>
 
   <div class="row">
     <div class="col-11 offset-1 mt-2">
       <%= form_with model: [user,introduce] do |f| %>
-        <div class="introduces">
+        <div class="field col-11">
           <%= f.label :紹介文 %>
-          <%= f.text_area :body, class: 'form-control' %>
-          <%= f.submit "保存", class: 'btn btn-success' %>
+          <%= f.text_area :body, class: 'form-control', rows: 10 %>
+        </div>
+        <div class="action col-11 text-right">
+          <%= f.submit "保存", class: 'btn btn-success mt-2' %>
         </div>
       <% end %>
     </div>
