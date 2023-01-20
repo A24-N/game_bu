@@ -359,6 +359,31 @@ background-color: #32CD32;
   margin: 0px;
 }
 
+/*管理者TOP*/
+
+.admin{
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.22);
+  background-color: #FFFAFA;
+}
+.admin-btn {
+  text-align: center;
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin-btn p {
+  border: 4mm ridge rgba(150, 150, 150, .6);
+  background-color: #A9A9A9;
+  color: #FFFFFF;
+  font-weight: bold;
+  width: 150px;
+}
+
+.admin-btn a:hover {
+  text-decoration: none;
+}
+
 /*フッター*/
 footer{
   background-color: #C0C0C0;

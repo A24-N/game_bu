@@ -1,6 +1,11 @@
 class Admin::PostsController < Admin::ApplicationController
   def index
-    @posts = Post.all
+    @user = params[:user_id]
+    if @user_id.blank?
+      @posts = Post.all
+    else
+      @posts = Post.where(user_id: @user_id)
+    end
   end
 
   def destroy

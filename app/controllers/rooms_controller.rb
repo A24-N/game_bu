@@ -7,7 +7,6 @@ class RoomsController < ApplicationController
     @member = @room.member
     @match = Match.find_by(user_id: @owner.id)
     @message = Message.new
-    # @messages = @room.messages.all
     @messages = @room.messages
   end
 

@@ -31,8 +31,12 @@
           <tr>
             <td colspan="5">
               <i class="fas fa-tag"></i>
-              <% @tags.each do |tag| %>
-                <%= link_to tag.name, search_path(range: "Tag", word: tag.name) %>
+              <% if @tags.present? %>
+                <% @tags.each do |tag| %>
+                  <%= link_to tag.name, search_path(range: "Tag", word: tag.name) %>
+                <% end %>
+              <% else %>
+                タグ無し
               <% end %>
             </td>
           </tr>

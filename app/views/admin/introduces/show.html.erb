@@ -1,21 +1,17 @@
-<div class="container mt-4">
+<div class="container">
   <div class="row">
-    <div class="col-12 offset-1 mt-2">
-      <div class="row">
-        <div class="col-4">
-          <p class="h4">紹介文詳細</p>
+    <div class="col-11 offset-1">
+      <div class="row mt-4 mr-5 admin">
+        <div class="col-4 mt-2">
+          <h2 class="heading">紹介文詳細</h2>
         </div>
-        <div class="col-4">
+        <div class="col-4 mt-2">
           <%= link_to "紹介文削除", admin_introduce_path(params[:id]), method: :delete, class: 'btn btn-danger btn-sm',"data-confirm" => "本当に消しますか？" %></p>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col offset-1">
-          <div><%= @introduce.introduce_from_user.nickname %>から<%= @introduce.introduce_to_user.nickname %>への紹介文</div>
-          <div>紹介文:<br>
-                <%= @introduce.body %>
-          </div>
+        <div class="col-11 offset-1">
+          <h4><%= @introduce.introduce_from_user.nickname %>から<%= @introduce.introduce_to_user.nickname %>への紹介文</h4>
+            <p class="m-2 border border-dark shadow"><%= safe_join(@introduce.body.split("\n"),tag(:br)) %></p>
         </div>
       </div>
     </div>
