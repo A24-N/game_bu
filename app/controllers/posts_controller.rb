@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  #cancancanによる権限確認
+  load_and_authorize_resource
 
   def index
     @npost = Post.new

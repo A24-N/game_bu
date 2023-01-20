@@ -1,4 +1,7 @@
 class MatchesController < ApplicationController
+  #cancancanによる権限確認
+  load_and_authorize_resource
+  
   def index
     @match = Match.new
     @match_status = Match.find_by(user_id: current_user.id)

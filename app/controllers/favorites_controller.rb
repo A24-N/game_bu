@@ -1,4 +1,7 @@
 class FavoritesController < ApplicationController
+  #cancancanによる権限確認(favoriteは除外)
+  load_and_authorize_resource only: [:create, :destroy]
+
   def create
     @post = Post.find(params[:post_id])
     post_favorite = Favorite.new(user_id: current_user.id, post_id: @post.id)

@@ -1,4 +1,7 @@
 class RelationshipsController < ApplicationController
+  #cancancanによる権限確認(followings/followersは除外)
+  load_and_authorize_resource only: [:create, :destroy]
+
 #フォローするとき
   def create
     current_user.follow(params[:user_id])

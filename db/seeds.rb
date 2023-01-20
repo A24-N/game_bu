@@ -10,5 +10,5 @@ User.create!(
   email: "admin@mail",
   nickname: "管理者",
   password: "password",
-  admin_status: true,
+  role: 1,
 )
