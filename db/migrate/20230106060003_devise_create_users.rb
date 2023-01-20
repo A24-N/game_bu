@@ -37,7 +37,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.integer :playstyle, default: 0
       t.string :activetime
       t.boolean :is_user_deleted, default: false, null: false
-      t.boolean :admin_status, default: false, null: false
+      t.integer :role, default: 0, null: false
 
       t.timestamps null: false
     end

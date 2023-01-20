@@ -1,4 +1,7 @@
 class CommentsController < ApplicationController
+  #cancancanによる権限確認
+  load_and_authorize_resource
+  
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params)

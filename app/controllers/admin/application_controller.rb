@@ -13,8 +13,8 @@ class Admin::ApplicationController < ApplicationController
   def check_admin_authorization
     authorize!(:access_admin_page, :all) if request.path.start_with?('/admin')
   end
-  
-  rescue_from CanCan::AccessDenied do |_exception|
-    redirect_to root_path, alert: '画面を閲覧する権限がありません。'
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to main_path, alert: 'この操作を行う権限がありません。'
   end
 end

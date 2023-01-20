@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(resource)
-    if current_user.admin_status?
+    if current_user.role == 1
       admin_root_path
     else
       main_path
@@ -18,5 +18,9 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to main_path, alert: 'この操作を行う権限がありません。'
   end
 end

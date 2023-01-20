@@ -7,9 +7,15 @@ class Ability
     user ||= User.new
     can :read,  :all
 
-    if user.admin_status?
+    if user.role == 1
       can :manage,  :all
       can :access_admin_page, :all
+
+    elsif user.role == 0
+      can :manage, :all
+
+    elsif user.role == 2
+      can :read, :all
 
     end
     # Define abilities for the user here. For example:

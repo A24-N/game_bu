@@ -1,6 +1,8 @@
 class RoomsController < ApplicationController
   before_action :room_user_check, only: [:show, :destroy]
-
+  #cancancanによる権限確認
+  load_and_authorize_resource
+  
   def show
     @room = Room.find(params[:id])
     @owner = @room.owner

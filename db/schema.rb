@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
     t.integer "playstyle", default: 0
     t.string "activetime"
     t.boolean "is_user_deleted", default: false, null: false
-    t.boolean "admin_status", default: false, null: false
+    t.integer "role", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

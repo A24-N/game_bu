@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-white">
     <div class="container-fluid border-bottom">
       <% if user_signed_in? %>
-        <% if current_user.admin_status? %>
+        <% if current_user.role == 1 %>
           <a class="navbar-brand" href="/main"><%= image_tag 'logo_resize.png', size: "150x75" %></a>
           <p class="h4">ようこそ!! <%= current_user.nickname %>さん!!</p>
           <ul class="navbar-nav ml-auto">
