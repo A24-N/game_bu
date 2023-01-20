@@ -1,23 +1,5 @@
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-11 offset-1 mt-2">
-      <p class="h4">"<%= @range %>" "<%= @word %>"の検索結果</p>
-      <% if @range == "User" %>
-        <%= render 'users/index', users: @users %>
-        <% if @users.blank? %>
-          <p>検索結果はありません。</p>
-        <% end %>
-      <% elsif @range == "Post" %>
-        <%= render 'posts/index', posts: @posts %>
-        <% if @posts.blank? %>
-          <p>検索結果はありません。</p>
-        <% end %>
-      <% elsif @range == "Tag" %>
-        <%= render 'posts/index', posts: @posts %>
-        <% if @posts.blank? %>
-          <p>検索結果はありません。</p>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-</div>
+<% if @range == "post" %>
+  <%= render 'admin/posts/index', posts: @posts%>
+<% elsif @range == "introduce" %>
+  <%= render 'admin/introduces/index', introduces: @introduces%>
+<% end %>

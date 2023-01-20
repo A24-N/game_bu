@@ -1,16 +1,30 @@
-<table class="table" style="table-layout:fixed;">
-  <thead>
-    <tr>
-      <th>ID.Fromユーザー</th>
-      <th>ID.Toユーザー</th>
-      <th></th>
-    </tr>
-  </thead>
-  <% introduces.each do |introduce| %>
-    <tr>
-      <td><%= introduce.introduce_from_user.id %>.<%= introduce.introduce_from_user.nickname %></td>
-      <td><%= introduce.introduce_to_user.id %>.<%= introduce.introduce_to_user.nickname %></td>
-      <td><%= link_to "詳細ページ", admin_introduce_path(introduce) %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="container">
+  <div class="row">
+    <div class="col-11 offset-1">
+      <h2 class="heading mt-4">紹介文一覧</h2>
+    </div>
+    <div class="row mt-3">
+      <div class="col-11 mx-4 admin">
+        <table class="table" style="table-layout:fixed;">
+          <thead>
+            <tr>
+              <th>ID.Fromユーザー</th>
+              <th>ID.Toユーザー</th>
+              <th></th>
+            </tr>
+          </thead>
+          <% introduces.each do |introduce| %>
+            <tr>
+              <td><%= introduce.introduce_from_user.id %>.<%= introduce.introduce_from_user.nickname %></td>
+              <td><%= introduce.introduce_to_user.id %>.<%= introduce.introduce_to_user.nickname %></td>
+              <td><%= link_to "詳細ページ", admin_introduce_path(introduce) %></td>
+            </tr>
+          <% end %>
+        </table>
+        <% if introduces.blank? %>
+          <p>紹介文はありません</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

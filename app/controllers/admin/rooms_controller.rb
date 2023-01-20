@@ -8,8 +8,7 @@ class Admin::RoomsController < Admin::ApplicationController
     @owner = @room.owner
     @member = @room.member
     @match = Match.find_by(user_id: @owner.id)
-    @message = Message.new
-    @messages = @room.messages.all
+    @messages = @room.messages
   end
 
   def destroy
@@ -21,7 +20,7 @@ class Admin::RoomsController < Admin::ApplicationController
     @room.destroy
     @owner_match.destroy
     @member_match.destroy
-    redirect_to admin_matches_path
+    redirect_to admin_rooms_path
   end
 
 end

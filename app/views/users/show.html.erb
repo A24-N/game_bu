@@ -33,7 +33,9 @@
           <% end %>
             <td><%= render 'relationships/follow_btn', user: @user %></td>
           <% if @user != current_user %>
-            <td><%= link_to "紹介文を書く", new_user_introduce_path(params[:id]), class: 'btn btn-info' %></td>
+            <% if @introduce.blank? %>
+              <td><%= link_to "紹介文を書く", new_user_introduce_path(params[:id]), class: 'btn btn-info' %></td>
+            <% end %>
             <td><%= link_to "紹介文を見る", user_introduces_path(params[:id]), class: 'btn btn-info' %></td>
           <% end %>
         </table>

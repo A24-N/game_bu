@@ -1,7 +1,9 @@
 class IntroducesController < ApplicationController
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+
   def index
     @user = User.find(params[:user_id])
-    @introduces = Introduce.where(introduce_to_user_id: params[:user_id])
+    @introduces = Introduce.where(introduce_to_user_id: params[:user_id]).page(params[:page]).per(6)
   end
 
   def new
@@ -40,5 +42,12 @@ class IntroducesController < ApplicationController
   private
   def introduce_params
     params.require(:introduce).permit(:body)
+  end
+
+  def ensure_correct_user
+    @introduce = Introduce.find(params[:id])
+    unless @introduce.introduce_from_user_id == current_user.id
+      redirect_to main_path, alert: "アクセス権限がありません:<"
+    end
   end
 end

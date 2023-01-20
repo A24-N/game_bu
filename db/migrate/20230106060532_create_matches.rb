@@ -6,6 +6,7 @@ class CreateMatches < ActiveRecord::Migration[6.1]
       t.integer :matching_status, default: 0, null: false
       t.string :room_comment
       t.string :game_name
+      t.string :game_hard
       t.timestamps
     end
   end
