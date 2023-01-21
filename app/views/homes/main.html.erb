@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-11 offset-1">
+      <h2 class="heading mt-4">GAME部へようこそ!!</h2>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-4 ">
+      <p class="h5">今の近況を投稿しよう！</p>
+      <%= render 'posts/form', npost: @npost %>
+    </div>
+    <div class="col-8">
+      <p class="h5">新着投稿(3件)</p>
+      <%= render 'posts/index', posts: @posts %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-11 offset-1 mt-2 match">
+      <h2>只今のマッチング状況</h2>
+      <% if @match&.matching_status == "in_action" %>
+        <%= link_to "マッチング中(ルームへ)", room_path(@match.room_id), class: 'btn btn-match', data: { 'turbolinks': false } %>
+      <% elsif @match&.matching_status == "stand_by" %>
+        <%= link_to "マッチング待機中", matches_path, class: 'btn btn-match' %>
+      <% else %>
+        <%= link_to "マッチングしてみよう！", matches_path, class: 'btn btn-match' %>
+      <% end %>
+    </div>
+  </div>
+
+</div>

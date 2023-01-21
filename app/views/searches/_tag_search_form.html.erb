@@ -1,0 +1,9 @@
+<div class="search_form">
+  <%= form_with url: search_path, method: :get do |f| %>
+    <%= f.hidden_field :range, :value => "Tag" %>
+    <%= f.text_field :word, placeholder: "タグ検索"%>
+    <%= button_tag type: :submit, class: "btn btn-outline-primary btn-sm" do %>
+      <i class="fas fa-search"></i>
+    <% end %>
+  <% end %>
+</div>

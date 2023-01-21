@@ -1,0 +1,15 @@
+ja:
+  enums:
+    user:
+      playstyle:
+        empty: "未選択"
+        enjoy: "エンジョイ"
+        hard: "ガチ勢"
+
+  views:
+    pagination:
+      first: "«"
+      last: "»"
+      previous: "‹"
+      next: "›"
+      truncate: "…"

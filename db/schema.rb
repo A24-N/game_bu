@@ -73,6 +73,10 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
   create_table "matches", force: :cascade do |t|
     t.integer "user_id"
     t.integer "room_id"
+    t.integer "matching_status", default: 0, null: false
+    t.string "room_comment"
+    t.string "game_name"
+    t.string "game_hard"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_matches_on_room_id"
@@ -82,7 +86,7 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
   create_table "messages", force: :cascade do |t|
     t.integer "user_id"
     t.integer "room_id"
-    t.text "message"
+    t.text "chat"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_messages_on_room_id"
@@ -94,6 +98,7 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
     t.integer "tag_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id", "tag_id"], name: "index_post_tag_relations_on_post_id_and_tag_id", unique: true
     t.index ["post_id"], name: "index_post_tag_relations_on_post_id"
     t.index ["tag_id"], name: "index_post_tag_relations_on_tag_id"
   end
@@ -118,10 +123,12 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "owner_id"
+    t.integer "member_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_rooms_on_user_id"
+    t.index ["member_id"], name: "index_rooms_on_member_id"
+    t.index ["owner_id"], name: "index_rooms_on_owner_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -137,12 +144,11 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "nickname", null: false
-    t.text "introduction"
+    t.text "introduction", default: "自己紹介を入力しよう"
     t.integer "playstyle", default: 0
     t.string "activetime"
     t.boolean "is_user_deleted", default: false, null: false
-    t.boolean "admin_status", default: false, null: false
-    t.integer "matching_status", default: 0, null: false
+    t.integer "role", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -166,5 +172,6 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
   add_foreign_key "posts", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
   add_foreign_key "relationships", "users", column: "follower_id"
-  add_foreign_key "rooms", "users"
+  add_foreign_key "rooms", "users", column: "member_id"
+  add_foreign_key "rooms", "users", column: "owner_id"
 end

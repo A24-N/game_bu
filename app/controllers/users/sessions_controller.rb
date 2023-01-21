@@ -2,11 +2,13 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  include ActionController::Cookies
 
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def new
+    super
+    cookies[:user_id] = current_user.id
+  end
 
   # POST /resource/sign_in
   # def create
@@ -17,6 +19,13 @@ class Users::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
+
+  #guest機能
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to main_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
 
   # protected
 

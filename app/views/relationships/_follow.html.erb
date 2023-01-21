@@ -1,0 +1,18 @@
+<% if users.exists? %>
+  <table class="table">
+    <% users.each do |user| %>
+      <tr>
+        <td><%= image_tag user.get_image(50,50) %></td>
+        <td>
+          <%= link_to user_path(user) do %>
+            <%= user.nickname %>
+          <% end %>
+        </td>
+        <td>フォロー数：<%= user.followings.count %></td>
+        <td>フォロワー数：<%= user.followers.count %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p class="mt-3">ユーザーはまだいません</p>
+<% end %>

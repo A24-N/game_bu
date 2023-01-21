@@ -1,2 +1,59 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-11 offset-1 text-center">
+      <h2 class="heading mt-4"><%= @post.title %></h2>
+    </div>
+    <div class="col-3 sticky-top side m-2">
+      <%= render 'users/info', user: current_user %>
+    </div>
+
+    <div class="col-8">
+      <div class="col offset-1">
+        <table class="table table-borderless">
+          <tr>
+            <th style="width:80px;"><%= image_tag @post.user.get_image(80,80) %></th>
+            <th class="align-middle col-3">
+              <%= link_to user_path(@post.user_id) do %>
+                <%= @post.user.nickname %>
+              <% end %>
+            </th>
+            <th class="align-middle" id="favorite_buttons_<%= @post.id %>"><%= render 'favorites/favorite_btn', post: @post %></th>
+            <% if @post.user_id == current_user.id %>
+              <div class="text-right">
+                <th class="align-bottom"><%= link_to "投稿を編集", edit_post_path(params[:id]), class: 'btn btn-success btn-sm' %></th>
+                <th class="align-bottom"><%= link_to "投稿を削除", post_path(params[:id]), method: :delete, class: 'btn btn-danger btn-sm' %></th>
+              </div>
+            <% end %>
+          </tr>
+          <tr>
+            <td colspan="5"><%= safe_join(@post.body.split("\n"),tag(:br)) %></td>
+          </tr>
+          <tr>
+            <td colspan="5">
+              <i class="fas fa-tag"></i>
+              <% if @tags.present? %>
+                <% @tags.each do |tag| %>
+                  <%= link_to tag.name, search_path(range: "Tag", word: tag.name) %>
+                <% end %>
+              <% else %>
+                タグ無し
+              <% end %>
+            </td>
+          </tr>
+          <tr class="text-right">
+            <td colspan="5">投稿日:<%= @post.created_at.strftime('%m月%d日%H:%M') %></td>
+          </tr>
+        </table>
+      </div>
+
+      <p class="h4 mt-3">コメント</p>
+      <div class="comment" id="posts_comment_<%= @post.id %>_list">
+        <%= render 'comments/comment_list', post: @post %>
+      </div>
+
+      <div class="comment" id="posts_comment_<%= @post.id %>">
+        <%= render 'comments/comment', post: @post, comment: @comment %>
+      </div>
+    </div>
+  </div>
+</div>

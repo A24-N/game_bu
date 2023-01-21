@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-11 offset-1">
+      <h2 class="heading mt-4"><%= @user.nickname %>さんのフォロー一覧</h2>
+    </div>
+    <div class="col-3 sticky-top side m-2">
+      <%= render 'users/info', user: current_user %>
+    </div>
+    <div class="col-8">
+      <%= render 'follow', users: @users %>
+      <%= paginate @users %>
+    </div>
+  </div>
+</div>

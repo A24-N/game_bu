@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-7 offset-1">
+      <h2 class="heading mt-4"><%= @owner.nickname %>と<%= @member.nickname %>のチャットルーム</h2>
+    </div>
+    <div class="col-3 d-flex align-items-end">
+      <%= link_to "ルーム解散", admin_room_path(@room), method: :delete, class: 'btn btn-danger' %>
+    </div>
+  </div>
+
+    <div class="col mt-2 room-info">
+      <h4 class="match_<%= @match.id %>">ルーム情報</h4>
+          <table>
+            <td style="padding-right: 20px;"><strong>ゲーム名：</strong><%= @match.game_name %>  </td>
+            <td><strong>ハード名：</strong><%= @match.game_hard %></td>
+          </table>
+          <p><strong>ルームコメント：</strong><%= safe_join(@match.room_comment.split("\n"),tag(:br)) %></p>
+    </div>
+
+  <div class="row">
+    <h4 class="col-12 text-center">チャット</h4>
+    <div class="col-2 text-center font-weight-bold">
+      <%= link_to admin_user_path(@owner.id) do %>
+        <%= image_tag @owner.get_image(100,100) %><br>
+        <%= @owner.nickname %>
+      <% end %>
+    </div>
+
+    <div class="col-8 room-chat">
+      <div id='messages' data-room_id="<%= @room.id %>">
+        <%= render 'admin/rooms/message', messages: @messages, owner: @owner, member: @member %>
+      </div>
+    </div>
+
+    <div class="col-2 text-center font-weight-bold">
+      <%= link_to admin_user_path(@member.id) do %>
+        <%= image_tag @member.get_image(100,100) %><br>
+        <%= @member.nickname %>
+      <% end %>
+    </div>
+  </div>
+</div>

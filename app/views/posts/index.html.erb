@@ -1,2 +1,17 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-11 offset-1">
+      <h2 class="heading mt-4">投稿一覧</h2>
+    </div>
+    <div class="col-3 sticky-top side m-2">
+      <%= render 'users/info', user: current_user %>
+    </div>
+    <div class="col-8">
+      <div class="mt-4">
+        <%= render 'index', posts: @posts %>
+        <%= paginate @posts %>
+      </div>
+
+    </div>
+  </div>
+</div>

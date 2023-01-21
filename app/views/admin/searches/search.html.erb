@@ -1,0 +1,5 @@
+<% if @range == "post" %>
+  <%= render 'admin/posts/index', posts: @posts%>
+<% elsif @range == "introduce" %>
+  <%= render 'admin/introduces/index', introduces: @introduces%>
+<% end %>
