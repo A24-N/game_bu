@@ -20,8 +20,8 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :follower
   has_many :followers, through: :reverse_of_relationships, source: :follow
 #紹介文関係
-  has_many :from_introduces,  class_name: "introduce", foreign_key: "introduce_from_user_id", dependent: :destroy
-  has_many :to_introduces,  class_name: "introduce", foreign_key: "introduce_to_user_id", dependent: :destroy
+  has_many :from_introduces, class_name: "Introduce", foreign_key: "introduce_from_user_id", dependent: :destroy
+  has_many :to_introduces, class_name: "Introduce", foreign_key: "introduce_to_user_id", dependent: :destroy
 
   has_one_attached :image
   enum playstyle: {empty: 0, enjoy: 1, hard: 2}
