@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = Post.where(user_id: @user.id).order(created_at: "DESC").limit(1)
-    @introduce = Introduce.find_by(introduce_from_user_id: current_user)
+    @introduce = Introduce.find_by(introduce_from_user_id: current_user, introduce_to_user_id: @user.id)
   end
 
 
