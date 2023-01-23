@@ -1,32 +1,35 @@
 <div class="container">
   <div class="row">
     <div class="col-11 offset-1">
-      <h2 class="heading mt-4">GAME部へようこそ!!</h2>
+      <h1 class="mt-4"><%= image_tag 'logo_resize.png' %>へようこそ!!</h1>
     </div>
   </div>
 
   <div class="row mt-5">
     <div class="col-4 ">
-      <p class="h5">今の近況を投稿しよう！</p>
-      <%= render 'posts/form', npost: @npost %>
+      <div class="post-form box">
+        <h3 class="text-center">今の近況を投稿しよう！</h3>
+        <%= render 'posts/form', npost: @npost %>
+      </div>
+      <div class="mt-2 match box text-center ">
+        <h3>只今のマッチング状況</h3>
+        <% if @match&.matching_status == "in_action" %>
+          <%= link_to "マッチング中(ルームへ)", room_path(@match.room_id), class: 'btn btn-match m-4', data: { 'turbolinks': false } %>
+        <% elsif @match&.matching_status == "stand_by" %>
+          <%= link_to "マッチング待機中", matches_path, class: 'btn btn-match m-4' %>
+        <% else %>
+          <%= link_to "マッチングしてみよう！", matches_path, class: 'btn btn-match m-4' %>
+        <% end %>
+      </div>
     </div>
     <div class="col-8">
-      <p class="h5">新着投稿(3件)</p>
+      <h3>新着投稿(3件)</h3>
       <%= render 'posts/index', posts: @posts %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-11 offset-1 mt-2 match">
-      <h2>只今のマッチング状況</h2>
-      <% if @match&.matching_status == "in_action" %>
-        <%= link_to "マッチング中(ルームへ)", room_path(@match.room_id), class: 'btn btn-match', data: { 'turbolinks': false } %>
-      <% elsif @match&.matching_status == "stand_by" %>
-        <%= link_to "マッチング待機中", matches_path, class: 'btn btn-match' %>
-      <% else %>
-        <%= link_to "マッチングしてみよう！", matches_path, class: 'btn btn-match' %>
-      <% end %>
-    </div>
+
   </div>
 
 </div>

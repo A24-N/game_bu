@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-8">
-      <div class="col offset-1">
+      <div class="col box">
         <table class="table table-borderless">
           <tr>
             <th style="width:80px;"><%= image_tag @post.user.get_image(80,80) %></th>
@@ -46,7 +46,7 @@
         </table>
       </div>
 
-      <p class="h4 mt-3">コメント</p>
+      <h3 class="mt-3 text-center">コメント</h3>
       <div class="comment" id="posts_comment_<%= @post.id %>_list">
         <%= render 'comments/comment_list', post: @post %>
       </div>

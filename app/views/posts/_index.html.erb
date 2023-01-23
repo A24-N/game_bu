@@ -1,34 +1,37 @@
-<table class="table" style="table-layout:fixed;">
-  <thead>
-    <tr>
-      <th></th>
-      <th>投稿者</th>
-      <th style="width:200px;">タイトル</th>
-      <th>タグ</th>
-      <th>いいね</th>
-      <th>コメント数</th>
-    </tr>
-  </thead>
-  <% posts.each do |post| %>
-    <tr>
-      <td><%= image_tag post.user.get_image(80,80) %></td>
-      <td><%= post.user.nickname %></td>
-      <td>
-        <%= link_to post_path(post) do %>
-          <%= post.title %>
-        <% end %>
-      </td>
-      <td>
+<% posts.each do |post| %>
+  <div class="post_<%= post.id %> post-box">
+  <table>
+    <td class="mx-4">
+      <%= link_to(post.user) do %>
+        <%= image_tag post.user.get_image(80,80) %><br>
+        <p class="text-center"><%= post.user.nickname %></p>
+      <% end %>
+    </td>
+    <td style="width:80px;"></td>
+    <td>
+      <%= link_to post_path(post) do %>
+        <p class="post-title"><%= post.title %></p>
+      <% end %>
+    </td>
+  </table>
+  <table style="display:flex">
+    <td>
+      <i class="fas fa-tag"></i>
+      <% if post.tags.present? %>
         <% post.tags.each do |tag| %>
-          <li class="list-unstyled">
-            <%= link_to tag.name, search_path(word: tag.name, range: Tag) %>
-          </li>
+          <%= link_to tag.name, search_path(range: "Tag", word: tag.name) %>
         <% end %>
-      </td>
-      <td id="favorite_buttons_<%= post.id %>">
-        <%= render 'favorites/favorite_btn', post: post %>
-      </td>
-      <td><%= post.comments.count %>件</td>
-    </tr>
-  <% end %>
-</table>
+      <% else %>
+        タグ無し
+      <% end %>
+    </td>
+    <td style="width:40px;"></td>
+    <td id="favorite_buttons_<%= post.id %>">
+      <%= render 'favorites/favorite_btn', post: post %>
+    </td>
+    <td style="width:20px;"></td>
+    <td>コメント：<%= post.comments.count %>件</td>
+  </table>
+  <p class="text-right mb-0">投稿日：<%= post.created_at.strftime('%y年%m月%d日') %></p>
+<% end %>
+
