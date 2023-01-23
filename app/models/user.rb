@@ -28,6 +28,9 @@ class User < ApplicationRecord
   has_one_attached :image
   enum playstyle: {empty: 0, enjoy: 1, hard: 2}
 
+  validates :nickname, presence:true, length:{maximum:10}
+
+
 # プロフィール画像登録時の処理
   def get_image(width, height)
     unless image.attached?
