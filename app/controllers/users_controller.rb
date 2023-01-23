@@ -2,12 +2,11 @@ class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   #cancancanによる権限確認
   load_and_authorize_resource
-  
+
   def destroy
     user = User.find(params[:id])
     user.destroy
-    flash[:notice] = 'ユーザーを削除しました。'
-    redirect_to :root
+    redirect_to :root, alert: "ユーザーを削除しました"
   end
 
   def edit
@@ -23,7 +22,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = Post.where(user_id: @user.id).order(created_at: "DESC").limit(1)
-    @introduce = Introduce.find_by(introduce_from_user_id: current_user)
+    @introduce = Introduce.find_by(introduce_from_user_id: current_user, introduce_to_user_id: @user.id)
   end
 
 

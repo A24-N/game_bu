@@ -1,7 +1,7 @@
 class MatchesController < ApplicationController
   #cancancanによる権限確認
   load_and_authorize_resource
-  
+
   def index
     @match = Match.new
     @match_status = Match.find_by(user_id: current_user.id)
@@ -9,9 +9,9 @@ class MatchesController < ApplicationController
     @search_gamename = params[:search_gamename]
     @search_gamehard = params[:search_gamehard]
     if @search_gamename.present? or @search_gamehard.present?
-      @stand_by_users = Match.where(matching_status: "stand_by").or(Match.where(game_name: @search_gamename)).or(Match.where(game_hard: @search_gamehard))
+      @stand_by_users = Match.preload(:user).where(matching_status: "stand_by").or(Match.where(game_name: @search_gamename)).or(Match.where(game_hard: @search_gamehard))
     else
-      @stand_by_users = Match.where(matching_status: "stand_by")
+      @stand_by_users = Match.preload(:user).where(matching_status: "stand_by")
     end
   end
 
@@ -22,7 +22,9 @@ class MatchesController < ApplicationController
     if @match.save
       redirect_to request.referer, notice: "マッチング待機中です:)"
     else
-      redirect_to request.referer, alert: "入力情報を確認してください:<"
+      @room = Room.where(owner_id: current_user).or(Room.where(member_id: current_user))
+      @stand_by_users = Match.preload(:user).where(matching_status: "stand_by")
+      render :index
     end
   end
 

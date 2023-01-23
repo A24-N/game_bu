@@ -1,3 +1,4 @@
+<%= render 'layouts/errors', obj: @match %>
 <div class="container">
   <div class="row">
     <div class="col-11 offset-1">
@@ -70,7 +71,7 @@
               <% end %>
             </strong></td>
             <% if match.user_id != current_user.id %>
-              <td class="text-right"><%= link_to "マッチング", matches_matching_path(user_id: match.user.id), method: :patch, class: 'btn btn-info' %></td>
+              <td class="text-right"><%= link_to "マッチング", matches_matching_path(user_id: match.user.id), method: :patch, class: 'btn btn-info', "data-confirm" => "このユーザーとマッチングしますか？" %></td>
             <% else %>
               <td class="text-right"><p>自分</p></td>
             <% end %>

@@ -7,17 +7,17 @@
       <%= render 'info', user: current_user %>
     </div>
     <div class="col-8">
-      <div class="col-8 offset-1">
+      <div class="col box">
         <p class="h4 mt-4"><%= @user.nickname %>さんの詳細情報</p>
         <table class="table table-borderless">
           <tr>
             <td class="text-center"><%= image_tag @user.get_image(100,100) %></td>
-            <td class="align-middle"><%= @user.nickname %></td>
+            <td class="align-middle" style="font-size: 26px;"><%= @user.nickname %></td>
           </tr>
           <tr>
             <td class="font-weight-bold">自己紹介:</td>
           </tr>
-          <td colspan="2"><%= safe_join(@user.introduction.split("\n"),tag(:br)) %></td>
+          <td colspan="2"><%= safe_join("#{@user.introduction}".split("\n"),tag(:br)) %></td>
           <tr>
             <td class="col-5 font-weight-bold">プレイスタイル:</td>
             <td class="font-weight-bold" >活動時間:</td>
@@ -41,16 +41,14 @@
         </table>
       </div>
 
-        <h5>最新の投稿</h5>
+        <h4>最新の投稿</h4>
         <% if @posts.blank? %>
           <P>まだ投稿していません。</P>
         <% else %>
           <%= link_to search_path(range: "UserPosts", word: @user.nickname, id: @user.id) do %>
             <%= @user.nickname %>さんの投稿一覧はこちら!!
           <% end %>
-          <table class="table table-borderless">
             <%= render 'posts/index', posts: @posts %>
-          </table>
         <% end %>
     </div>
   </div>

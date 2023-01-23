@@ -1,5 +1,15 @@
 
-h2 {
+h1 {
+  display: inline-block;
+  background-color: #FFFFFF;
+  font-size: 40px;
+  box-shadow: 0px 10px 10px -5px rgb(0 0 0 / 50%);
+  width: 500px;
+  border: 1px solid rgba(0,0,0,0.1);
+  font-weight: bold;
+}
+
+.heading {
   display: inline-block;
   background: linear-gradient(transparent 60%, #98FB98 60%)
 }
@@ -27,6 +37,8 @@ html,body {
 /*my-info(サイドバー)*/
 .side {
   box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.5);
+  background-color: #FFFAFA;
+  height: 500px;
 }
 
 
@@ -235,6 +247,20 @@ background-color: #32CD32;
   color: #FFFAFA;
 }
 
+/*投稿一覧*/
+.post-box {
+  margin: 5px 0px;
+  padding: 0.5rem;
+  background: #f7f7f7;
+  border-left: solid 6px #EE82EE;
+  color: #696969;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
+}
+
+.post-box .post-title {
+  font-size: 30px;
+}
+
 /*紹介文吹き出し*/
 .introduce-box {
 	position: relative;
@@ -361,7 +387,7 @@ background-color: #32CD32;
 
 /*管理者TOP*/
 
-.admin{
+.box{
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.22);
   background-color: #FFFAFA;
 }
