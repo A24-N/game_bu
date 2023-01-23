@@ -2,9 +2,9 @@ class Admin::PostsController < Admin::ApplicationController
   def index
     @user = params[:user_id]
     if @user_id.blank?
-      @posts = Post.all
+      @posts = Post.preload(:user, :tags).all
     else
-      @posts = Post.where(user_id: @user_id)
+      @posts = Post.preload(:user, :tags).where(user_id: @user_id)
     end
   end
 

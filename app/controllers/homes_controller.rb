@@ -6,7 +6,7 @@ class HomesController < ApplicationController
 
   def main
     @npost = Post.new
-    @posts = Post.order(created_at: "DESC").limit(3)
+    @posts = Post.preload([:user, :tags]).order(created_at: "DESC").limit(3)
     @match = Match.find_by(user_id: current_user.id)
   end
 

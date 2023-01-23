@@ -1,6 +1,6 @@
 class Admin::IntroducesController < Admin::ApplicationController
   def index
-    @introduces = Introduce.all
+    @introduces = Introduce.preload(:introduce_from_user, :introduce_to_user).all
   end
 
   def show

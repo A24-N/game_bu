@@ -5,7 +5,7 @@ class IntroducesController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @introduces = Introduce.where(introduce_to_user_id: params[:user_id]).page(params[:page]).per(6)
+    @introduces = Introduce.preload(:introduce_from_user).where(introduce_to_user_id: params[:user_id]).page(params[:page]).per(6)
   end
 
   def new

@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @npost = Post.new
-    @posts = Post.order("created_at DESC").page(params[:page]).per(6)
+    @posts = Post.preload(:user, :tags).order("created_at DESC").page(params[:page]).per(6)
   end
 
   def create
