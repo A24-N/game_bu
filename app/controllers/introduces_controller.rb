@@ -14,19 +14,25 @@ class IntroducesController < ApplicationController
   end
 
   def create
-    user = User.find(params[:user_id])
-    introduce = Introduce.new(introduce_params)
-    introduce.introduce_from_user_id = current_user.id
-    introduce.introduce_to_user_id = user.id
-    introduce.save
-    redirect_to user_introduces_path(user)
+    @user = User.find(params[:user_id])
+    @introduce = Introduce.new(introduce_params)
+    @introduce.introduce_from_user_id = current_user.id
+    @introduce.introduce_to_user_id = @user.id
+    if @introduce.save
+      redirect_to user_introduces_path(@user), notice: "紹介文を保存しました:)"
+    else
+      render :new
+    end
   end
 
   def destroy
     user = User.find(params[:user_id])
     introduce = Introduce.find(params[:id])
-    introduce.destroy
-    redirect_to user_introduces_path(user)
+    if introduce.destroy
+      redirect_to user_introduces_path(user), notice: "紹介文を削除しました:)"
+    else
+      redirect_to request.referer, alert: "削除できませんでした:<"
+    end
   end
 
   def edit
@@ -35,10 +41,13 @@ class IntroducesController < ApplicationController
   end
 
   def update
-    user = User.find(params[:user_id])
-    introduce = Introduce.find(params[:id])
-    introduce.update(introduce_params)
-    redirect_to user_introduces_path(user)
+    @user = User.find(params[:user_id])
+    @introduce = Introduce.find(params[:id])
+    if @introduce.update(introduce_params)
+      redirect_to user_introduces_path(@user), notice: "紹介文を編集しました:)"
+    else
+      render :edit
+    end
   end
 
   private

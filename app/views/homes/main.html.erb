@@ -1,3 +1,4 @@
+<%= render 'layouts/errors', obj: @post %>
 <div class="container">
   <div class="row">
     <div class="col-11 offset-1">
@@ -9,7 +10,7 @@
     <div class="col-4 ">
       <div class="post-form box">
         <h3 class="text-center">今の近況を投稿しよう！</h3>
-        <%= render 'posts/form', npost: @npost %>
+        <%= render 'posts/form', npost: @post %>
       </div>
       <div class="mt-2 match box text-center ">
         <h3>只今のマッチング状況</h3>
@@ -33,3 +34,7 @@
   </div>
 
 </div>
+
+<% if @post.errors.any? %>
+  <%= javascript_pack_tag 'post_render' %>
+<%end%>

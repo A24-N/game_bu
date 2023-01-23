@@ -13,3 +13,24 @@ ja:
       previous: "‹"
       next: "›"
       truncate: "…"
+
+  activerecord:
+    attributes:
+      user:
+        nickname: ニックネーム
+        password: パスワード
+
+      match:
+        room_comment: ルームコメント
+        game_name: ゲーム名
+        game_hard: ハード名
+
+      post:
+        title: タイトル
+        body: 本文
+
+      introduce:
+        body: 紹介文
+
+      comment:
+        comment: コメント
