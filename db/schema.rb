@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "nickname", null: false
-    t.text "introduction", default: "自己紹介を入力しよう"
+    t.text "introduction"
     t.integer "playstyle", default: 0
     t.string "activetime"
     t.boolean "is_user_deleted", default: false, null: false
