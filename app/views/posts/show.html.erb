@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col-11 offset-1 text-center">
+    <div class="col-12 text-center">
       <h2 class="heading mt-4"><%= @post.title %></h2>
     </div>
-    <div class="col-3 sticky-top side m-2">
+    <div class="col-xl-3 col-sm-11 side m-2">
       <%= render 'users/info', user: current_user %>
     </div>
 
-    <div class="col-8">
+    <div class="col-xl-8 col-sm-11">
       <div class="col box">
         <table class="table table-borderless">
           <tr>
