@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     if user.destroy
-      redirect_to :root, notice: "ユーザーを削除しました"
+      redirect_to :root, notice: "退会しました"
     else
       redirect_to request.referer, alert: "ユーザーを削除できませんでした"
     end

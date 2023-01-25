@@ -11,6 +11,28 @@
       <% end %>
     </div>
   </div>
+      <div class="col box">
+        <p class="h4 mt-4"><%= @user.nickname %>さんの詳細情報</p>
+        <table class="table table-borderless">
+          <tr>
+            <td class="text-center"><%= image_tag @user.get_image(100,100) %></td>
+            <td class="align-middle" style="font-size: 26px;"><%= @user.nickname %></td>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">自己紹介:</td>
+          </tr>
+          <td colspan="2"><%= safe_join("#{@user.introduction}".split("\n"),tag(:br)) %></td>
+          <tr>
+            <td class="col-5 font-weight-bold">プレイスタイル:</td>
+            <td class="font-weight-bold" >活動時間:</td>
+          </tr>
+          <tr>
+            <td><%= @user.playstyle_i18n %></td>
+            <td><%= @user.activetime %></td>
+          </tr>
+        </table>
+        </div>
+
   <div class="row mt-3 text-center admin">
     <div class="col-md-3 admin-btn">
       <%= link_to edit_admin_user_path(@user) do %>

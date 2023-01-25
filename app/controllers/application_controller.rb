@@ -13,6 +13,6 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to main_path, alert: 'この操作を行う権限がありません。'
+    redirect_to request.referer, alert: 'この操作を行う権限がありません。'
   end
 end
