@@ -4,19 +4,18 @@
     <td class="text-center"><%= image_tag user.get_image(100,100) %></td>
   </tr>
   <tr>
-    <td>ニックネーム:<br>
-    <%= user.nickname %></td>
+    <td class="text-center"><strong><%= user.nickname %></strong></td>
   </tr>
   <tr>
-    <td><%= link_to "紹介文一覧", user_introduces_path(user) %></td>
+    <td class="text-center"><%= link_to "紹介文一覧", user_introduces_path(user) %></td>
   </tr>
   <tr>
-    <td><%= link_to "いいねした投稿", user_favorites_path(user) %></td>
+    <td class="text-center"><%= link_to "いいねした投稿", user_favorites_path(user) %></td>
   </tr>
   <tr>
-    <td><%= link_to "フォロー一覧", user_followings_path(user) %></td>
+    <td class="text-center"><%= link_to "フォロー一覧", user_followings_path(user) %></td>
   </tr>
   <tr>
-    <td><%= link_to "フォロワー一覧", user_followers_path(user) %></td>
+    <td class="text-center"><%= link_to "フォロワー一覧", user_followers_path(user) %></td>
   </tr>
 </table>

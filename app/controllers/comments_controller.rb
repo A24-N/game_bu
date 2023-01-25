@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-      redirect_to request.referer, notice: "送信しました:)"
+      redirect_to request.referer, notice: "コメントを送信しました:)"
     else
       flash[:alert]= @comment.errors.full_messages.join(',')
       redirect_to request.referer

@@ -1,4 +1,3 @@
-
 h1 {
   display: inline-block;
   background-color: #FFFFFF;
@@ -13,13 +12,12 @@ h1 {
   display: inline-block;
   background: linear-gradient(transparent 60%, #98FB98 60%)
 }
-main {
-  background-color: #FFFFF0;
-}
 
-html,body {
+body {
+  background-image: url("../../assets/images/main_image.jpg");
+  background-size: cover;
   height: 100%;
-  background-color: #FFFFF0;
+  width: 100%;
 }
 
 .whole {
@@ -30,8 +28,30 @@ html,body {
 }
 
 .container {
-  box-shadow: 0px 10px 10px -5px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 15px 10px #f8f9fa;
   height: 100%;
+  padding-bottom: 30px;
+  background-color: #FFFFF0;
+}
+.main-image .container{
+  padding-bottom: initial;
+  box-shadow: initial;
+  background-color: initial;
+}
+
+.box{
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.22);
+  background-color: #FFFAFA;
+  padding-bottom: 10px;
+}
+
+.alert {
+  margin-bottom: 0px;
+}
+
+/*ヘッダー*/
+.navbar-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
 /*my-info(サイドバー)*/
@@ -43,7 +63,7 @@ html,body {
 
 
 /* Aboutページ*/
-.about_image {
+.about-image {
   height: 600px;
   background-image: url("../../assets/images/about_image.jpg");
   background-repeat: no-repeat;
@@ -52,7 +72,7 @@ html,body {
   position: relative;
 }
 
-.about_body {
+.about-body {
   text-align: center;
   background-color: rgba(255,255,255,0.8);
   position: absolute;          /* 位置指定 */
@@ -67,17 +87,6 @@ html,body {
 }
 
 /* Topページ*/
-.main_image {
-  background-image: url("../../assets/images/main_image.jpg");
-  background-size: cover;
-  height: 100%;
-  width: 100%;
-}
-
-.main_image main {
-  background-color: #1fe0;
-}
-
 .logo {
   background-color: rgba(255,255,255,0.3);
   margin-top: 50px;
@@ -214,8 +223,7 @@ background-color: #32CD32;
   background-color: #A9A9A9;
 }
 
-/*Topページ*/
-
+/*mainページ*/
 .btn-match {
   display: flex;
   justify-content: space-between;
@@ -322,10 +330,12 @@ background-color: #32CD32;
 }
 
 /*ルームチャット*/
-.room-chat {
+.room-message {
   background-color: #87CEFA;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.22);
-  border-radius: 10px;
+  border-radius: 10px 10px 0px 0px;
+  min-height: 200px;
+  padding: 10px;
 }
 
 .fukidashi {
@@ -359,14 +369,14 @@ background-color: #32CD32;
 }
 
 .my-chat {
-  margin-top: 10px;
+  margin-right: 15px;
 }
 .my-chat p {
   display: inline-block;
   position: relative;
   margin: 0px;
   padding: 8px;
-  max-width: 250px;
+  max-width: 80%;
   border-radius: 12px;
   background: #30e852;
   font-size: 15px;
@@ -385,12 +395,21 @@ background-color: #32CD32;
   margin: 0px;
 }
 
-/*管理者TOP*/
-
-.box{
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.22);
-  background-color: #FFFAFA;
+.room-chat {
+  height: 60px;
+  background-color: #233B6C;
+  border-radius: 0px 0px 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.room-chat .form-control {
+  width: 90%;
+  margin: auto;
+}
+
+/*管理者TOP*/
 .admin-btn {
   text-align: center;
   padding: 30px 0;
@@ -414,5 +433,6 @@ background-color: #32CD32;
 footer{
   background-color: #C0C0C0;
   width: 100%;
+  border-top: thick double #708090 ;
 }
 

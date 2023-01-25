@@ -9,7 +9,10 @@ class Admin::IntroducesController < Admin::ApplicationController
 
   def destroy
     introduce = Introduce.find(params[:id])
-    introduce.destroy
-    redirect_to admin_introduces_path
+    if introduce.destroy
+      redirect_to admin_introduces_path, notice: "紹介文を削除しました"
+    else
+      redirect_to request.referer, alert: "紹介文を削除できませんでした"
+    end
   end
 end

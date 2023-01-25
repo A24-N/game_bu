@@ -4,34 +4,34 @@
       <h2 class="heading mt-4">ユーザー一覧</h2>
     </div>
   </div>
-  <div class="row font-weight-bold admin mt-3">
-    <div class="col-2">
+  <div class="row font-weight-bold admin mt-3 box">
+    <div class="col-md-2 col-sm-6">
       ID.ネーム
     </div>
-    <div class="col-2">
+    <div class="col-md-2 col-sm-6">
       ステータス
     </div>
-    <div class="col-2">
+    <div class="col-2 d-none d-md-block">
       ID.ネーム
     </div>
-    <div class="col-2">
+    <div class="col-2 d-none d-md-block">
       ステータス
     </div>
-    <div class="col-2">
+    <div class="col-2 d-none d-md-block">
       ID.ネーム
     </div>
-    <div class="col-2">
+    <div class="col-2 d-none d-md-block">
       ステータス
     </div>
 
     <% @users.each do |user| %>
-      <div class="col-2 mt-2">
+      <div class="col-md-2 col-sm-6 mt-2 box">
         <%= user.id %>.
         <%= link_to admin_user_path(user) do %>
           <%= user.nickname %>
         <% end %>
       </div>
-      <div class="col-2 mt-2">
+      <div class="col-md-2 col-sm-6 mt-2 box">
         <% if user.is_user_deleted == false  %>
           <p class="text-success font-weight-bold">可動中</p>
         <% elsif %>

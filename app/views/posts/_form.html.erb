@@ -1,15 +1,15 @@
 <%= form_with model: npost do |f| %>
-  <div class="field col-10">
+  <div class="field col-10 mx-auto">
     <%= f.label :title %>
     <%= f.text_field :title, class:'form-control' %>
   </div>
 
-  <div class="field col-10">
+  <div class="field col-10 mx-auto">
     <%= f.label :body %>
-    <%= f.text_area :body, class:'form-control' %>
+    <%= f.text_area :body, class:'form-control', rows: 5 %>
   </div>
 
-  <div class="field col-10">
+  <div class="field col-10 mx-auto">
     <%= f.label :"tag(,で区切ると複数タグ登録できます)" %>
     <%= f.text_field :tag, value: @tag_list, class: 'form-control' %>
   </div>
