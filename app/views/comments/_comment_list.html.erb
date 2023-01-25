@@ -1,17 +1,17 @@
 <table>
   <% post.comments.each do |comment| %>
     <tr class="border-bottom">
-      <td>
-        <%= link_to(post.user) do %>
+      <td width="20%">
+        <%= link_to(comment.user) do %>
           <%= image_tag comment.user.get_image(50,50) %><br>
           <%= comment.user.nickname %>
         <% end %>
       </td>
-      <td width="80%"><%= safe_join(comment.comment.split("\n"),tag(:br)) %></td>
+      <td width="70%"><%= safe_join(comment.comment.split("\n"),tag(:br)) %></td>
       <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
       <% if current_user.id == comment.user_id %>
         <td>
-          <%= link_to post_comment_path(comment.post_id, comment), method: :delete,"data-confirm" => "本当に消しますか？", remote: true do %>
+          <%= link_to post_comment_path(comment.post_id, comment), method: :delete, "data-confirm" => "本当に消しますか？", remote: true do %>
             <i class="fas fa-times"></i>
           <% end %>
         </td>
