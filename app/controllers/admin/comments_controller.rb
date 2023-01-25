@@ -1,9 +1,11 @@
 class Admin::CommentsController < Admin::ApplicationController
-
   def destroy
     @post = Post.find(params[:post_id])
-    Comment.find(params[:id]).destroy
-    redirect_to request.referer
+    if Comment.find(params[:id]).destroy
+      redirect_to request.referer, notice: "コメントを削除しました"
+    else
+      redirect_to request.referer, alert: "コメントを削除できませんでした"
+    end
   end
 
   private

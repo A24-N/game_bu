@@ -8,17 +8,17 @@
     </div>
   </div>
 
-    <div class="col mt-2 room-info">
-      <h4 class="match_<%= @match.id %>">ルーム情報</h4>
-          <table>
-            <td style="padding-right: 20px;"><strong>ゲーム名：</strong><%= @match.game_name %>  </td>
-            <td><strong>ハード名：</strong><%= @match.game_hard %></td>
-          </table>
-          <p>
-            <strong>ルームコメント：</strong><br>
-            <%= safe_join(@match.room_comment.split("\n"),tag(:br)) %>
-          </p>
-    </div>
+  <div class="col mt-2 room-info">
+    <h4 class="match_<%= @match.id %>">ルーム情報</h4>
+        <table>
+          <td style="padding-right: 20px;"><strong>ゲーム名：</strong><%= @match.game_name %>  </td>
+          <td><strong>ハード名：</strong><%= @match.game_hard %></td>
+        </table>
+        <p>
+          <strong>ルームコメント：</strong><br>
+          <%= safe_join(@match.room_comment.split("\n"),tag(:br)) %>
+        </p>
+  </div>
 
   <div class="row">
     <h4 class="col-12 text-center">チャット</h4>
@@ -71,4 +71,5 @@
       <% end %>
     </div>
   </div>
+  
 </div>

@@ -39,7 +39,7 @@ class PostsController < ApplicationController
     tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
       @post.save_tag(tag_list)
-      redirect_to post_path(@post)
+      redirect_to post_path(@post), notice: "投稿を更新しました:)"
     else
       render :edit
     end
@@ -55,6 +55,7 @@ class PostsController < ApplicationController
   end
 
   private
+
   def post_params
     params.require(:post).permit(:title, :body)
   end

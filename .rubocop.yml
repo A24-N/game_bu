@@ -1,0 +1,64 @@
+inherit_from: .rubocop_todo.yml
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+# rubocopの対象外ファイル
+  Exclude:
+    - "config/environments/*"
+    - "config/puma.rb"
+    - "bin/**/*"
+    - "log/**/*"
+    - "tmp/**/*"
+    - "vendor/**/*"
+
+### ルールのカスタマイズ
+
+# 設定が厳しいので一旦全てfalseにする
+Metrics:
+  Enabled: false
+
+# メソッドの改行ルール
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+# 日本語にコメントを許可
+Style/AsciiComments:
+  Enabled: false
+
+# クラスにコメントを残さなくても良い
+Style/Documentation:
+  Enabled: false
+
+# コントローラ等のモジュールをネストしての宣言
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# 文字列のfreeze（Ruby3からは自動でfreezeされるので要らない）
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# 文字列による配列の%記法のチェック
+Style/WordArray:
+  Enabled: false
+
+# メソッド名等の命名の指摘
+Naming/PredicateName:
+  Enabled: false
+
+# 未i18nのチェック（バリデーションエラーメッセージをi18nに登録するのはやや冗長？なためfalse）
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+# before_actionの際の未定義メソッドのチェック（deviseとの兼ね合いで一旦false）
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
+
+# 今回inverse_ofを明示的に表示する必要はないため
+Rails/InverseOf:
+  Enabled: false
+
+# パス記述の警告を解除
+Rails/FilePath:
+  Enabled: false

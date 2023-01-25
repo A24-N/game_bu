@@ -31,7 +31,7 @@ class IntroducesController < ApplicationController
     if introduce.destroy
       redirect_to user_introduces_path(user), notice: "紹介文を削除しました:)"
     else
-      redirect_to request.referer, alert: "削除できませんでした:<"
+      redirect_to request.referer, alert: "紹介文を削除できませんでした"
     end
   end
 
@@ -51,6 +51,7 @@ class IntroducesController < ApplicationController
   end
 
   private
+
   def introduce_params
     params.require(:introduce).permit(:body)
   end

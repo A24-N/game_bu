@@ -1,5 +1,6 @@
 class Admin::ApplicationController < ApplicationController
   before_action :check_admin_authorization
+
   private
 
   def after_sign_in_path_for(resource)
