@@ -1,5 +1,5 @@
 <% if users.exists? %>
-  <table class="table">
+  <table class="table box">
     <% users.each do |user| %>
       <tr>
         <td><%= image_tag user.get_image(50,50) %></td>
