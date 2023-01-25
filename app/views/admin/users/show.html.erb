@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-6 offset-1">
+    <div class="col-md-6 offset-1">
       <h2 class="heading mt-4"><%= @user.nickname %>の詳細ページ</h2>
     </div>
-    <div class="col-3 d-flex align-items-end">
+    <div class="col-md-3 d-flex align-items-end">
       <% if @user.is_user_deleted == false  %>
         <p>会員ステータス：<span class="text-success font-weight-bold">可動中</span></p>
       <% elsif %>
@@ -12,22 +12,22 @@
     </div>
   </div>
   <div class="row mt-3 text-center admin">
-    <div class="col-3 admin-btn">
+    <div class="col-md-3 admin-btn">
       <%= link_to edit_admin_user_path(@user) do %>
         <p>会員情報編集</p>
       <% end %>
     </div>
-    <div class="col-3 admin-btn">
+    <div class="col-md-3 admin-btn">
       <%= link_to admin_search_path(user_id: @user.id, range: "post") do %>
         <p>投稿一覧</p>
       <% end %>
     </div>
-    <div class="col-3 admin-btn">
+    <div class="col-md-3 admin-btn">
       <%= link_to admin_search_path(introduce_from_user_id: @user.id, range: "introduce") do %>
         <p>紹介文一覧</p>
       <% end %>
     </div>
-    <div class="col-3 admin-btn">
+    <div class="col-md-3 admin-btn">
       <%= link_to admin_root_path do %>
         <p>管理者TOPへ</p>
       <% end %>

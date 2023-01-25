@@ -44,6 +44,9 @@ group :development do
   gem 'spring'
   gem 'better_errors'
   gem 'bullet'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :test do
@@ -62,10 +65,11 @@ gem 'pry-rails'
 gem 'rails-i18n'
 gem 'cancancan'
 gem 'dotenv-rails'
-group :production do
-  gem 'mysql2'
-end
 gem "kaminari"
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+
+group :production do
+  gem 'mysql2'
+end

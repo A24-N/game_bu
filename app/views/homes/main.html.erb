@@ -7,32 +7,29 @@
   </div>
 
   <div class="row mt-5">
-    <div class="col-4 ">
+    <div class="col-xl-4 col-md-12 ">
       <div class="post-form box">
         <h3 class="text-center">今の近況を投稿しよう！</h3>
         <%= render 'posts/form', npost: @post %>
       </div>
-      <div class="mt-2 match box text-center ">
+      <div class="col-md-12 mt-2 match box text-center ">
         <h3>只今のマッチング状況</h3>
+        <div class="mx-auto" style="width: 300px;">
         <% if @match&.matching_status == "in_action" %>
-          <%= link_to "マッチング中(ルームへ)", room_path(@match.room_id), class: 'btn btn-match m-4', data: { 'turbolinks': false } %>
+          <%= link_to "マッチング中(ルームへ)", room_path(@match.room_id), class: 'btn btn-match', data: { 'turbolinks': false } %>
         <% elsif @match&.matching_status == "stand_by" %>
-          <%= link_to "マッチング待機中", matches_path, class: 'btn btn-match m-4' %>
+          <%= link_to "マッチング待機中", matches_path, class: 'btn btn-match' %>
         <% else %>
-          <%= link_to "マッチングしてみよう！", matches_path, class: 'btn btn-match m-4' %>
+          <%= link_to "マッチングしてみよう！", matches_path, class: 'btn btn-match' %>
         <% end %>
+        </div>
       </div>
     </div>
-    <div class="col-8">
+    <div class="col-xl-8 col-md-12">
       <h3>新着投稿(3件)</h3>
       <%= render 'posts/index', posts: @posts %>
     </div>
   </div>
-
-  <div class="row">
-
-  </div>
-
 </div>
 
 <% if @post.errors.any? %>

@@ -5,8 +5,11 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    user.destroy
-    redirect_to :root, alert: "ユーザーを削除しました"
+    if user.destroy
+      redirect_to :root, notice: "ユーザーを削除しました"
+    else
+      redirect_to request.referer, alert: "ユーザーを削除できませんでした"
+    end
   end
 
   def edit
@@ -15,8 +18,11 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    user.update(user_params)
-    redirect_to user_path(current_user), notice: "更新しました:)"
+    if user.update(user_params)
+      redirect_to user_path(current_user), notice: "ユーザー情報を更新しました:)"
+    else
+      redirect_to request.referer, alert: "ユーザー情報を更新できませんでした"
+    end
   end
 
   def show
@@ -25,9 +31,8 @@ class UsersController < ApplicationController
     @introduce = Introduce.find_by(introduce_from_user_id: current_user, introduce_to_user_id: @user.id)
   end
 
-
-
   private
+
   def user_params
     params.require(:user).permit(:introduction, :image, :playstyle, :activetime )
   end

@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-11 offset-1">
-      <div class="row mt-4 mr-5 admin">
+
+      <div class="row mt-4 mr-5 admin box">
         <div class="col-4 mt-2">
           <h2 class="heading">投稿詳細</h2>
         </div>
@@ -9,59 +10,61 @@
           <%= link_to "投稿削除", admin_post_path(params[:id]), method: :delete, class: 'btn btn-danger btn-sm',"data-confirm" => "本当に消しますか？" %></p>
         </div>
         <div class="col-11 offset-1">
-        <table class="table table-borderless">
-          <tr>
-            <th style="width:80px;"><%= image_tag @post.user.get_image(80,80) %></th>
-            <th class="align-middle col-3">
-              <%= link_to admin_user_path(@post.user_id) do %>
-                <%= @post.user.nickname %>
-              <% end %>
-            </th>
-            <th class="align-middle"><p>いいね<%= @post.favorites.count %>件</p></th>
-          </tr>
-          <tr>
-            <td colspan="5"><%= safe_join(@post.body.split("\n"),tag(:br)) %></td>
-          </tr>
-          <tr>
-            <td colspan="5">
-              <i class="fas fa-tag"></i>
-              <% if @tags.present? %>
-                <% @tags.each do |tag| %>
-                  <%= tag.name %>
+          <table class="table table-borderless">
+            <tr>
+              <th style="width:80px;"><%= image_tag @post.user.get_image(80,80) %></th>
+              <th class="align-middle col-3">
+                <%= link_to admin_user_path(@post.user_id) do %>
+                  <%= @post.user.nickname %>
                 <% end %>
-              <% else %>
-                タグ無し
-              <% end %>
-            </td>
-          </tr>
-          <tr class="text-right">
-            <td colspan="5">投稿日:<%= @post.created_at.strftime('%m月%d日%H:%M') %></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="row mt-4 mr-5 admin">
-      <div class="col-4 mt-2">
-        <h2 class="heading">コメント</h2>
-      </div>
-      <div class="col-11 offset-1 comment">
-        <% if @post.comments.blank? %>
-          <p>コメントはありません</p>
-        <% else %>
-          <table class="table">
-            <% @post.comments.each do |comment| %>
-              <tr>
-                <td>
-                  <%= comment.user.nickname %>
-                </td>
-                <td><%= safe_join(comment.comment.split("\n"),tag(:br)) %></td>
-                <td class="align-bottom text-right"><%= comment.created_at.strftime('%Y/%m/%d') %><%= link_to '削除', admin_post_comment_path(comment.post_id, comment), method: :delete, class: 'btn btn-danger btn-sm mx-2', "data-confirm" => "本当に消しますか？", remote: true %> </td>
-              </tr>
-            <% end %>
+              </th>
+              <th class="align-middle"><p>いいね<%= @post.favorites.count %>件</p></th>
+            </tr>
+            <tr>
+              <td colspan="5"><%= safe_join(@post.body.split("\n"),tag(:br)) %></td>
+            </tr>
+            <tr>
+              <td colspan="5">
+                <i class="fas fa-tag"></i>
+                <% if @tags.present? %>
+                  <% @tags.each do |tag| %>
+                    <%= tag.name %>
+                  <% end %>
+                <% else %>
+                  タグ無し
+                <% end %>
+              </td>
+            </tr>
+            <tr class="text-right">
+              <td colspan="5">投稿日:<%= @post.created_at.strftime('%m月%d日%H:%M') %></td>
+            </tr>
           </table>
-        <% end %>
+        </div>
       </div>
+
+      <div class="row mt-4 mr-5 admin">
+        <div class="col-4 mt-2">
+          <h2 class="heading">コメント</h2>
+        </div>
+        <div class="col-11 offset-1 comment">
+          <% if @post.comments.blank? %>
+            <p>コメントはありません</p>
+          <% else %>
+            <table class="table">
+              <% @post.comments.each do |comment| %>
+                <tr>
+                  <td>
+                    <%= comment.user.nickname %>
+                  </td>
+                  <td><%= safe_join(comment.comment.split("\n"),tag(:br)) %></td>
+                  <td class="align-bottom text-right"><%= comment.created_at.strftime('%Y/%m/%d') %><%= link_to '削除', admin_post_comment_path(comment.post_id, comment), method: :delete, class: 'btn btn-danger btn-sm mx-2', "data-confirm" => "本当に消しますか？", remote: true %> </td>
+                </tr>
+              <% end %>
+            </table>
+          <% end %>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

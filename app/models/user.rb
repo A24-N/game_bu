@@ -30,7 +30,6 @@ class User < ApplicationRecord
 
   validates :nickname, presence:true, length:{maximum:10}
 
-
 # プロフィール画像登録時の処理
   def get_image(width, height)
     unless image.attached?
@@ -58,6 +57,7 @@ class User < ApplicationRecord
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
       user.nickname = "ゲストユーザー"
+      user.introduction = "こちらはゲストユーザーです。\n閲覧以外の機能は制限されています。"
       user.role = 2
     end
   end
