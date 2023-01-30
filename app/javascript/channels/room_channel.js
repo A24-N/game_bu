@@ -8,6 +8,7 @@ $(document).on('turbolinks:load', function () {
                   channel: 'RoomChannel',
                   room: $('#messages').data('room_id'),
               }, {
+
     connected() {
       // un used
     },
