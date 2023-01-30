@@ -1,33 +1,22 @@
-<div class='message' id="<%= message.id %>">
-  <% if message.user_id == owner.id %>
-    <div class="text-left fukidashi">
-        <div class="says">
-          <p><%= safe_join(message.chat.split("\n"),tag(:br)) %></p>
-        </div>
-        <div class="time">
-          <p><%= message.created_at.strftime('%H:%M') %></p>
-          <% if message.user_id == current_user.id %>
-            <%= link_to message_path(message), method: :delete do %>
-              <i class="fas fa-times"></i>
-            <% end %>
-          <% end %>
-        </div>
-    </div>
-  <% else %>
-    <div class="text-right">
-      <div class="my-chat">
-        <p><%= safe_join(message.chat.split("\n"),tag(:br)) %></p>
-      </div>
-      <div class="time">
-        <p>
-        <%= message.created_at.strftime('%H:%M') %>
-        <% if message.user_id == current_user.id %>
-          <%= link_to message_path(message), method: :delete do %>
-            <i class="fas fa-times"></i>
-          <% end %>
-        <% end %>
-        </p>
+  <div id="message_id_<%= message.id %>">
+    <div id="parent_<%= message.id %>">
+      <div id="child_<%= message.id %>">
+        <%= simple_format(message.chat) %>
       </div>
     </div>
-  <% end %>
-</div>
+    <div class="time">
+      <p><%= message.created_at.strftime('%H:%M') %></p>
+    </div>
+  </div>
+
+<!--チャットを左右へ振り分け-->
+<script>
+  if ($('#messages').data('current_user_id') == <%= message.user_id %>) {
+    $('#message_id_<%= message.id %>').addClass('text-right')
+    $('#parent_<%= message.id %>').addClass('my-chat')
+  } else {
+    $('#message_id_<%= message.id %>').addClass('text-left')
+    $('#parent_<%= message.id %>').addClass('fukidashi')
+    $('#child_<%= message.id %>').addClass('says')
+  }
+</script>

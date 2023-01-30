@@ -1,6 +1,6 @@
 class RoomChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "room_channel_#{params['room']}" 
+    stream_from "room_channel_#{params['room']}"
   end
 
   def unsubscribed
@@ -8,7 +8,14 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    Message.create! chat: data['message'], user_id: current_user.id, room_id: params['room']
+    record = Message.create! chat: data['message'], user_id: current_user.id, room_id: params['room']
+    ActionCable.server.broadcast("room_channel_#{params['room']}", {message: render_message(record)})
+  end
+
+  private
+
+  def render_message(record)
+    ApplicationController.renderer.render(partial: 'messages/message', locals: {message: record})
   end
 
 end
