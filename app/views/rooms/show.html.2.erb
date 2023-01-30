@@ -24,50 +24,37 @@
     <h4 class="col-12 text-center">チャット</h4>
     <!--スマホレスポンシブ対応-->
     <div class="col d-block d-md-none text-center font-weight-bold">
-      <% if @owner.id != current_user.id %>
         <%= link_to user_path(@owner.id) do %>
           <%= image_tag @owner.get_image(100,100) %><br>
           <%= @owner.nickname %>
         <% end %>
-      <% else %>
-        <%= link_to user_path(@member.id) do %>
-          <%= image_tag @member.get_image(100,100) %><br>
-          <%= @member.nickname %>
-        <% end %>
-      <% end %>
     </div>
     <div class="col d-block d-md-none text-center font-weight-bold">
-      <%= link_to user_path(current_user.id) do %>
-        <%= image_tag current_user.get_image(100,100) %><br>
-        <%= current_user.nickname %>
+      <%= link_to user_path(@member.id) do %>
+        <%= image_tag @member.get_image(100,100) %><br>
+        <%= @member.nickname %>
       <% end %>
     </div>
     <!--PCレスポンシブ対応-->
     <div class="col-sm-2 d-none d-md-block text-center font-weight-bold">
-      <% if @owner.id != current_user.id %>
         <%= link_to user_path(@owner.id) do %>
           <%= image_tag @owner.get_image(100,100) %><br>
           <%= @owner.nickname %>
         <% end %>
-      <% else %>
-        <%= link_to user_path(@member.id) do %>
-          <%= image_tag @member.get_image(100,100) %><br>
-          <%= @member.nickname %>
-        <% end %>
-      <% end %>
     </div>
     <div class="col-md-8">
       <div class="room-message" id='messages' data-room_id="<%= @room.id %>">
-        <%= render @messages %>
+        <%#= render @messages %>
+        <%= render @messages, owner: @owner, member: @member, current_user: current_user %>
       </div>
       <div class="room-chat">
         <%= text_field_tag :content, nil, data: { behavior: 'room_speaker' }, placeholder: "Enterで送信", class: 'form-control mb-2' %>
       </div>
     </div>
     <div class="col-2 d-none d-md-block text-center font-weight-bold">
-      <%= link_to user_path(current_user.id) do %>
-        <%= image_tag current_user.get_image(100,100) %><br>
-        <%= current_user.nickname %>
+      <%= link_to user_path(@member.id) do %>
+        <%= image_tag @member.get_image(100,100) %><br>
+        <%= @member.nickname %>
       <% end %>
     </div>
   </div>
