@@ -9,7 +9,7 @@ class MatchesController < ApplicationController
     @search_gamename = params[:search_gamename]
     @search_gamehard = params[:search_gamehard]
     if @search_gamename.present? or @search_gamehard.present?
-      @stand_by_users = Match.preload(:user).where(matching_status: "stand_by").or(Match.where(game_name: @search_gamename)).or(Match.where(game_hard: @search_gamehard))
+      @stand_by_users = Match.where(matching_status: "stand_by").and(Match.where(game_name: @search_gamename)).or(Match.where(game_hard: @search_gamehard))
     else
       @stand_by_users = Match.preload(:user).where(matching_status: "stand_by")
     end
