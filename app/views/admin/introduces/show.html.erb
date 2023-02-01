@@ -11,6 +11,7 @@
         <div class="col-11 offset-1">
           <h4><%= @introduce.introduce_from_user.nickname %>から<%= @introduce.introduce_to_user.nickname %>への紹介文</h4>
             <p class="m-2 border border-dark shadow"><%= safe_join(@introduce.body.split("\n"),tag(:br)) %></p>
+            <span class="sentiment-score">本文の感情分析スコア<%= @introduce.score %></span>
         </div>
       </div>
     </div>
