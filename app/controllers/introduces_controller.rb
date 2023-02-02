@@ -15,10 +15,11 @@ class IntroducesController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
-    @introduce = Introduce.new(introduce_params)
-    @introduce.introduce_from_user_id = current_user.id
-    @introduce.introduce_to_user_id = @user.id
-    if @introduce.save
+    introduce = Introduce.new(introduce_params)
+    introduce.introduce_from_user_id = current_user.id
+    introduce.introduce_to_user_id = @user.id
+    introduce.score = Language.get_data(introduce_params[:body])
+    if introduce.save
       redirect_to user_introduces_path(@user), notice: "紹介文を保存しました:)"
     else
       render :new
@@ -42,8 +43,9 @@ class IntroducesController < ApplicationController
 
   def update
     @user = User.find(params[:user_id])
-    @introduce = Introduce.find(params[:id])
-    if @introduce.update(introduce_params)
+    introduce = Introduce.find(params[:id])
+    introduce.score = Language.get_data(introduce_params[:body])
+    if introduce.update(introduce_params)
       redirect_to user_introduces_path(@user), notice: "紹介文を編集しました:)"
     else
       render :edit
