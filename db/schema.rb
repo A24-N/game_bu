@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_07_053719) do
+ActiveRecord::Schema.define(version: 2023_02_01_082547) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2023_01_07_053719) do
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "score", precision: 5, scale: 3
     t.index ["introduce_from_user_id", "introduce_to_user_id"], name: "introduce_unique_index", unique: true
     t.index ["introduce_from_user_id"], name: "index_introduces_on_introduce_from_user_id"
     t.index ["introduce_to_user_id"], name: "index_introduces_on_introduce_to_user_id"
