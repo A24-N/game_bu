@@ -20,6 +20,7 @@ body {
   width: 100%;
 }
 
+/*フッター一固定*/
 .whole {
   display: grid;
   grid-template-rows: auto 1fr auto;
@@ -87,140 +88,87 @@ body {
 }
 
 /* Topページ*/
-.logo {
-  background-color: rgba(255,255,255,0.3);
-  margin-top: 50px;
-  text-align: center;
+
+.top-font{
+  font-family: 'DotGothic16', sans-serif;
 }
 
-.logo   p {
-    font-size: 20px;
+.logo {
+  background-color: #000;
+  color: #FFF;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 50px;
+  text-align: center;
+  border-radius: 10px;
+  border: solid;
+  display: flex;
+  flex-flow: column;
+}
+
+.logo p {
+    font-size: 26px;
     font-weight: 700;
   }
+
+.logo-image {
+  margin-top: 3px;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 5px;
+}
+
+.login-btn{
+  text-align: left;
+  font-size: 26px;
+  font-weight: bold;
+  margin: 3px 0px 3px 15%;
+}
+
+.login-btn a:visited{
+  color: #FFF;
+}
+
+.login-btn a:link{
+  color: #FFF;
+}
+
+.login-btn :hover:before{
+  content: '';
+  display: inline-block;
+  margin-right: 5px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 11px solid #ffffff;
+  border-right: 0;
+}
 
 .login {
   margin-top: 50px;
   text-align: center;
-      display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn a {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  width: 300px;
-  height: 60px;
-  color: #165E83;
-  font-size: 18px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: 0.5s;
 }
 
-.btn a:hover {
-  color: #233B6C;
+
+/*アコーディオンで現れるエリア*/
+.about-box {
+  display: none;/*はじめは非表示*/
+  margin:0 3% 3% 3%;
+  padding: 3%;
 }
 
-/* ログインボタン*/
-.btn01 a {
-  background-color: #87CEFA;
-  border: 1px solid transparent;
+.about-box p {
+  font-size: 17px;
+  text-align: left
 }
 
-.btn01 a::before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  border: 1px solid #333;
-  border-color: #000080;
-}
-
-.btn01 a::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: -35px;
-  transform: translateY(-50%);
-  width: 70px;
-  height: 1px;
-  background-color: #000080;
-}
-
-.btn01 a:hover {
-  background-color: #00BFFF;
-}
-
-/* 新規登録ボタン*/
-.btn02 a {
-  background-color: #90EE90;
-  border: 1px solid transparent;
-}
-
-.btn02 a::before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  border: 1px solid #333;
-  border-color: #006400;
-}
-
-.btn02 a::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: -35px;
-  transform: translateY(-50%);
-  width: 70px;
-  height: 1px;
-  background-color: #006400;
-}
-
-.btn02 a:hover {
-background-color: #32CD32;
-}
-
-/* ゲストログインボタン*/
-.btn03 a {
-  background-color: #DCDCDC;
-  border: 1px solid transparent;
-}
-
-.btn03 a::before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  border: 1px solid #333;
-  border-color: #696969;
-}
-
-.btn03 a::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: -35px;
-  transform: translateY(-50%);
-  width: 70px;
-  height: 1px;
-  background-color: #696969;
-}
-
-.btn03 a:hover {
-  background-color: #A9A9A9;
+.title a:hover {
+  cursor: pointer;
+  text-decoration:underline solid !important;
 }
 
 /*mainページ*/

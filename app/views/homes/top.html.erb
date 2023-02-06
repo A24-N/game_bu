@@ -1,28 +1,46 @@
-<body class="main-image">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 logo mt-5">
-        <div><%= image_tag 'logo_clear.png' %></div>
-        <p class="logo-font">
-          本サイトは主に格闘ゲームを取り扱う<br>
-          ゲーム専門のコミュニティサイトです。<br>
-          「対戦相手の募集」「自身の近況を投稿」<br>
-          などを行うことができます。
-        </p>
+<%= render 'top_animation' %>
+
+<body class="main-image top-font">
+  <div class="logo">
+    <div><%= image_tag 'logo_clear.png', class: 'logo-image' %></div>
+    <p>
+      本サイトはゲーム好きが集まる<br>
+      ゲーム専門のコミュニティサイトです。<br>
+      「対戦相手の募集」「自身の近況を投稿」<br>
+      などを行うことができます。
+    </p>
+  </div>
+  <div class="logo">
+    <div class="login-btn">
+      <%= link_to "ログイン", new_user_session_path %>
+    </div>
+    <div class="login-btn">
+      <%= link_to "新規登録", new_user_registration_path %>
+    </div>
+    <div class="login-btn">
+      <%= link_to "ゲストログイン(閲覧用)", users_guest_sign_in_path, method: :post %>
+    </div>
+    <div class="accordion-area">
+      <div class="login-btn title">
+        <a>About</a>
       </div>
-      <div class="col-lg-6 login">
-        <div>
-          <div class="btn btn01">
-            <%= link_to "ログイン", new_user_session_path %>
-          </div>
-          <div class="btn btn02">
-            <%= link_to "新規登録", new_user_registration_path %>
-            </div>
-          <div class="btn btn03">
-            <%= link_to "ゲストログイン(閲覧用)", users_guest_sign_in_path, method: :post %>
-          </div>
-        </div>
+      <div class="about-box">
+        <p>
+          昨今、コロナウィルス事情によって休日を家で過ごす人が増えている。<br>
+          自宅でできる趣味ということで、ゲームをやり始めた人も少なくはないだろう。<br>
+          「ゲーム仲間を見つけよう」「多くの人が様々な人と交流ができる場所の提供」<br>
+          をテーマとしたサイトになっています。<br>
+          本サイトは、プログラミング初学者によって作られたポートフォリオサイトになっております。<br>
+        </p>
       </div>
     </div>
   </div>
 </body>
+
+<script>
+  //アコーディオンをクリックした時の動作
+$('.title').on('click', function() {//タイトル要素をクリックしたら
+  var findElm = $(this).next(".about-box");//直後のアコーディオンを行うエリアを取得し
+  $(findElm).slideToggle();//アコーディオンの上下動作
+});
+</script>
