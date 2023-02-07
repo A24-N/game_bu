@@ -3,6 +3,7 @@
   <head>
     <title>GAME部</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= favicon_link_tag('favicon.ico') %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -11,7 +12,7 @@
 
     <script>
       // ユーザーと紐付けたいため、ユーザーがサインインしているときのみ通知のON/OFFボタンを表示させます
-      <% if user_signed_in? %>
+      <% if user_signed_in? and current_user.role == 0 %>
         window.OneSignal = window.OneSignal || [];
         OneSignal.push(function() {
           OneSignal.init({
@@ -24,7 +25,7 @@
       OneSignal.push(function() {
         OneSignal.on('subscriptionChange', function (isSubscribed) {
           OneSignal.getUserId(function(userId) {
-    
+
     　　　　　// 登録した時の処理
             if (isSubscribed) {
               $.ajax({
@@ -34,7 +35,7 @@
                   onesignal_user_id: userId,
                 }
               });
-    
+
     　　　　　// 解除した時の処理
             } else {
               $.ajax({
@@ -45,7 +46,7 @@
                 }
               });
             }
-    
+
           });
         });
       });
