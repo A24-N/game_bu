@@ -62,6 +62,7 @@ class MatchesController < ApplicationController
       @match.game_name = @owner_match.game_name
       @match.game_hard = @owner_match.game_hard
       @match.save
+      @match.push(@owner_match)
       redirect_to room_path(@room)
     else
       redirect_to request.referer, alert: "既に他のユーザーとマッチ中です:<"

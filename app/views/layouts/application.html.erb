@@ -7,6 +7,50 @@
     <%= csp_meta_tag %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+
+    <script>
+      // ユーザーと紐付けたいため、ユーザーがサインインしているときのみ通知のON/OFFボタンを表示させます
+      <% if user_signed_in? %>
+        window.OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+            appId: "82541a18-3477-40cc-9f73-aab911d2e9ab",
+            notifyButton: {
+              enable: true,
+            }
+          });
+        });
+      OneSignal.push(function() {
+        OneSignal.on('subscriptionChange', function (isSubscribed) {
+          OneSignal.getUserId(function(userId) {
+    
+    　　　　　// 登録した時の処理
+            if (isSubscribed) {
+              $.ajax({
+                url:'/onesignal/<%= current_user.id %>/add',
+                type: 'POST',
+                data: {
+                  onesignal_user_id: userId,
+                }
+              });
+    
+    　　　　　// 解除した時の処理
+            } else {
+              $.ajax({
+                url:'/onesignal/<%= current_user.id %>/add',
+                type: 'POST',
+                data: {
+                  onesignal_user_id: userId,
+                }
+              });
+            }
+    
+          });
+        });
+      });
+      <% end %>
+    </script>
   </head>
 
   <body>
