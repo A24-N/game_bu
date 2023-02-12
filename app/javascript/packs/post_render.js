@@ -1,1 +1,1 @@
-require("../post_render.js")
+history.replaceState('', '', '/main')
