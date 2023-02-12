@@ -1,10 +1,12 @@
 <footer>
-  <div class="container-fluid border-top">
-    <p class="text-center">
-      本サイトはプログラミング初学者によって作成された<br>
-      ポートフォリオサイトになっております。<br>
-      お問い合わせ：home6.sky@gmail.com
-    </p>
-    <p>© 2023 A24 All rights reserved.</p>
-  </div>
+  <% if user_signed_in? %>
+    <div class="container-fluid border-top">
+      <p class="text-center">
+        本サイトはプログラミング初学者によって作成された<br>
+        ポートフォリオサイトになっております。<br>
+        お問い合わせ：home6.sky@gmail.com
+      </p>
+      <p>© 2023 A24 All rights reserved.</p>
+    </div>
+  <% end %>
 </footer>
