@@ -7,4 +7,19 @@ class Match < ApplicationRecord
   validates :room_comment, presence:true,length:{maximum:200}
 
   enum matching_status: {afk: 0, stand_by: 1, in_action: 2 }
+
+  def push(owner)
+    params = {"app_id" => "82541a18-3477-40cc-9f73-aab911d2e9ab",
+              "contents" => {'en' => 'matched', 'ja' => 'マッチングしました!!'},
+              "include_player_ids" => [owner.user.onesignal_user_id]
+            }
+    uri = URI.parse('https://onesignal.com/api/v1/notifications')
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Post.new(uri.path,'Content-Type'  => 'application/json;charset=utf-8')
+    request.body = params.as_json.to_json
+    response = http.request(request)
+    puts response.body
+  end
 end
