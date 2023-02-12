@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   root to: "homes#top"
   get 'main' => "homes#main"
-  get 'about' => "homes#about"
   get 'error' => "homes#error"
 
   post 'onesignal/:user_id/add', to: 'users#onesignal_add', as: 'onesignal_add'

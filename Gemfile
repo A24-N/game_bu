@@ -64,6 +64,7 @@ gem 'enum_help'
 gem 'pry-rails'
 gem 'rails-i18n'
 gem 'cancancan'
+gem 'gon'
 gem 'dotenv-rails'
 gem "kaminari"
 gem "net-smtp"
