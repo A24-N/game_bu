@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :example
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   private
@@ -19,6 +20,10 @@ class ApplicationController < ActionController::Base
 
   def record_not_found
     redirect_to error_path
+  end
+
+  def example
+    gon.OneSignal_key = ENV['OneSignal_key']
   end
 
 end
