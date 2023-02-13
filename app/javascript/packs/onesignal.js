@@ -1,3 +1,4 @@
+csrf_token = $('meta[name=csrf-token]').attr('content');
 window.OneSignal = window.OneSignal || [];
   OneSignal.push(function() {
     OneSignal.init({
@@ -18,6 +19,7 @@ OneSignal.push(function() {
           type: 'POST',
           data: {
             onesignal_user_id: userId,
+            authenticity_token: csrf_token,
           }
         });
 
@@ -28,6 +30,7 @@ OneSignal.push(function() {
           type: 'POST',
           data: {
             onesignal_user_id: userId,
+            authenticity_token: csrf_token,
           }
         });
       }
