@@ -14,7 +14,7 @@ OneSignal.push(function() {
 　　　　　// 登録した時の処理
       if (isSubscribed) {
         $.ajax({
-          url:'/onesignal/<%= current_user.id %>/add',
+          url: gon.OneSignal_add_url,
           type: 'POST',
           data: {
             onesignal_user_id: userId,
@@ -24,7 +24,7 @@ OneSignal.push(function() {
 　　　　　// 解除した時の処理
       } else {
         $.ajax({
-          url:'/onesignal/<%= current_user.id %>/add',
+          url: gon.OneSignal_remove_url,
           type: 'POST',
           data: {
             onesignal_user_id: userId,
