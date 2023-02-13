@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :example
+  before_action :gon
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   private
@@ -22,8 +22,11 @@ class ApplicationController < ActionController::Base
     redirect_to error_path
   end
 
-  def example
+#以下値をjsに渡すためbeforeアクションで常に実行
+  def gon
     gon.OneSignal_key = ENV['OneSignal_key']
+    gon.OneSignal_add_url = "/onesignal/#{current_user.id}/add"
+    gon.OneSignal_remove_url = "/onesignal/#{current_user.id}/remove"
   end
 
 end

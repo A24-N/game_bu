@@ -45,7 +45,7 @@ class UsersController < ApplicationController
     # user_idは、params[:user_id]で取得
     # onesignal_user_idは、params[:onesignal_user_id]で取得
     @user = User.find(params[:user_id])
-    @user.onesignal_user_id = params[:onesignal_user_id]
+    @user.onesignal_user_id = nil
     @user.update(user_params_jquery)
     render status: 200, json: { status: 200, message: "Success" }
   end
