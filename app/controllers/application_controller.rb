@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :gon
+  before_action :rails_to_js
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   private
@@ -23,10 +23,12 @@ class ApplicationController < ActionController::Base
   end
 
 #以下値をjsに渡すためbeforeアクションで常に実行
-  def gon
-    gon.OneSignal_key = ENV['OneSignal_key']
-    gon.OneSignal_add_url = "/onesignal/#{current_user.id}/add"
-    gon.OneSignal_remove_url = "/onesignal/#{current_user.id}/remove"
+  def rails_to_js
+    if user_signed_in?
+      gon.OneSignal_key = ENV['OneSignal_key']
+      gon.OneSignal_add_url = "/onesignal/#{current_user.id}/add"
+      gon.OneSignal_remove_url = "/onesignal/#{current_user.id}/remove"
+    end
   end
 
 end
