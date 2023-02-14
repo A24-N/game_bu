@@ -1,91 +1,93 @@
 <%= render 'layouts/errors', obj: @match %>
 <div class="container">
-  <div class="row">
+  <div class="row pt-3">
+    <div class="col-md-10 col-sm-12 offset-md-1 room-info">
+      <p class="text-center"> マッチング機能を利用する場合、画面右下の<%= image_tag 'bell.png' %>からPush通知を許可することを推奨します。<br>
+          Push通知を利用しない場合はマッチング時の通知がないのでブラウザの更新をこまめに行うことを推奨します。<br>
+          また、通知はいつでも無効化することができます。<br>
+          ※画面右下に<%= image_tag 'bell.png' %>が表示されない場合はブラウザの再読み込みをお試しください。
+     </p>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-5 col-sm-12 offset-md-1">
+      <h4>マッチング</h4>
+      <!--NoMethodErrorを防ぐために&を活用-->
+      <% if @match_status&.matching_status == "stand_by" %>
+        <div class="action text-center mt-5 ">
+          <%= link_to "マッチング待機解除", match_path(@match_status), method: :delete, class: 'btn btn-match' %>
+        </div>
+      <% elsif @match_status&.matching_status == "in_action" %>
+        <div class="action text-center mt-5 ">
+          <%= link_to "マッチング中(ルームへ)", room_path(@room.ids), class: 'btn btn-match', data: { 'turbolinks': false } %>
+        </div>
+      <% else %>
+        <%= form_with model: @match do |f| %>
+          <%= f.hidden_field :matching_status, value: "stand_by" %>
+          <div class="field">
+            <%= f.label :"ゲーム名:" %>
+            <%= f.text_field :game_name, placeholder: "ゲーム名", class: 'form-control' %>
+          </div>
+          <div class="field">
+            <%= f.label :"ハード名:" %>
+            <%= f.text_field :game_hard, placeholder: "ハード名", class: 'form-control' %>
+          </div>
+          <div class="field">
+            <%= f.label :"ルームコメント:" %>
+            <%= f.text_area :room_comment, placeholder: "ルームコメントをここに", class: 'form-control', rows: 3 %>
+          </div>
+          <div class="action text-right mt-2">
+            <%= f.submit "マッチング待機開始", class: 'btn btn-outline-success' %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-md-5 col-sm-12">
+      <h4>ルーム検索</h4>
+      <%= form_with url: { action: 'index' }, method: :get do |f| %>
+        <div class="field">
+          <%= f.label :"ゲーム名:" %>
+          <%= f.text_field :search_gamename, placeholder: "ゲーム名", class: 'form-control' %>
+        </div>
+        <div class="field">
+          <%= f.label :"ハード名:" %>
+          <%= f.text_field :search_gamehard, placeholder: "ハード名", class: 'form-control' %>
+        </div>
+        <div class="action text-right mt-2">
+          <%= link_to "クリア", matches_path, class: 'btn btn-outline-success mx-4' %>
+          <%= f.submit "検索", class: 'btn btn-outline-success' %>
+        </div>
+      <% end %>
+    </div>
     <div class="col-11 offset-1">
-      <h2 class="heading mt-4">マッチング一覧</h2>
+      <h2 class="heading mt-4">待機中ユーザー</h2>
     </div>
-    <div class="col-xl-3 col-sm-11 side m-2">
-      <%= render 'users/info', user: current_user %>
-    </div>
-    <div class="col-xl-8 col-sm-11 mx-2">
-      <div class="row">
-
-        <div class="col-md-6 col-sm-12">
-          <h4>マッチング</h4>
-          <!--NoMethodErrorを防ぐために&を活用-->
-          <% if @match_status&.matching_status == "stand_by" %>
-            <div class="action text-center mt-5 ">
-              <%= link_to "マッチング待機解除", match_path(@match_status), method: :delete, class: 'btn btn-match' %>
-            </div>
-          <% elsif @match_status&.matching_status == "in_action" %>
-            <div class="action text-center mt-5 ">
-              <%= link_to "マッチング中", room_path(@room.ids), class: 'btn btn-match', data: { 'turbolinks': false } %>
-            </div>
-          <% else %>
-            <%= form_with model: @match do |f| %>
-              <%= f.hidden_field :matching_status, value: "stand_by" %>
-              <div class="field">
-                <%= f.label :"ゲーム名:" %>
-                <%= f.text_field :game_name, placeholder: "ゲーム名", class: 'form-control' %>
-              </div>
-              <div class="field">
-                <%= f.label :"ハード名:" %>
-                <%= f.text_field :game_hard, placeholder: "ハード名", class: 'form-control' %>
-              </div>
-              <div class="field">
-                <%= f.label :"ルームコメント:" %>
-                <%= f.text_area :room_comment, placeholder: "ルームコメントをここに", class: 'form-control', rows: 3 %>
-              </div>
-              <div class="action text-right mt-2">
-                <%= f.submit "マッチング待機開始", class: 'btn btn-outline-success' %>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-
-        <div class="col-md-6 col-sm-12">
-          <h4>ルーム検索</h4>
-          <%= form_with url: { action: 'index' }, method: :get do |f| %>
-            <div class="field">
-              <%= f.label :"ゲーム名:" %>
-              <%= f.text_field :search_gamename, placeholder: "ゲーム名", class: 'form-control' %>
-            </div>
-            <div class="field">
-              <%= f.label :"ハード名:" %>
-              <%= f.text_field :search_gamehard, placeholder: "ハード名", class: 'form-control' %>
-            </div>
-            <div class="action text-right mt-2">
-              <%= link_to "クリア", matches_path, class: 'btn btn-outline-success mx-4' %>
-              <%= f.submit "検索", class: 'btn btn-outline-success' %>
-            </div>
-          <% end %>
-        </div>
-
-        <div class="col-12">
-          <% @stand_by_users.each do |match| %>
-            <div class="match_<%= match.id %> tag">
-              <table style="width:100%;">
-                <td style="width:80px;"><%= image_tag match.user.get_image(50,50) %></td>
-                <td><strong>
-                  <%= link_to user_path(match.user.id) do %>
-                    <%= match.user.nickname %>
-                  <% end %>
-                </strong></td>
-                <% if match.user_id != current_user.id %>
-                  <td class="text-right"><%= link_to "マッチング", matches_matching_path(user_id: match.user.id), method: :patch, class: 'btn btn-info', "data-confirm" => "このユーザーとマッチングしますか？" %></td>
-                <% else %>
-                  <td class="text-right"><p>自分</p></td>
+    <div class="col-md-10 offset-md-1">
+      <% if @stand_by_users.blank? %>
+        <p>現在マッチング待機中のユーザーはいません。</p>
+      <% else %>
+        <% @stand_by_users.each do |match| %>
+          <div class="match_<%= match.id %> tag">
+            <table style="width:100%;">
+              <td style="width:80px;"><%= image_tag match.user.get_image(50,50) %></td>
+              <td><strong>
+                <%= link_to user_path(match.user.id) do %>
+                  <%= match.user.nickname %>
                 <% end %>
-              </table>
-              <p><strong>ゲーム名：</strong><%= match.game_name %></p>
-              <p><strong>ハード名：</strong><%= match.game_hard %></p>
-              <p><strong>ルームコメント：</strong></p>
-              <p><%= safe_join(match.room_comment.split("\n"),tag(:br)) %></p>
-            </div>
-          <% end %>
-        </div>
-
-      </div>
+              </strong></td>
+              <% if match.user_id != current_user.id %>
+                <td class="text-right"><%= link_to "マッチング", matches_matching_path(user_id: match.user.id), method: :patch, class: 'btn btn-info', "data-confirm" => "このユーザーとマッチングしますか？" %></td>
+              <% else %>
+                <td class="text-right"><p>自分</p></td>
+              <% end %>
+            </table>
+            <p><strong>ゲーム名：</strong><%= match.game_name %></p>
+            <p><strong>ハード名：</strong><%= match.game_hard %></p>
+            <p><strong>ルームコメント：</strong></p>
+            <p><%= safe_join(match.room_comment.split("\n"),tag(:br)) %></p>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>

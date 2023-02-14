@@ -31,42 +31,50 @@ class MatchesController < ApplicationController
 #マッチグ待機状態を解除
   def destroy
     match = Match.find_by(user_id: current_user.id)
-    match.destroy
-    redirect_to request.referer
+    if match.matching_status == "stand_by"
+      match.destroy
+      redirect_to request.referer
+    else
+      redirect_to request.referer, alert: "マッチングが成立しています。ルームへ移動してください。"
+    end
   end
 
   def matching
     @match = Match.find_by(user_id: current_user.id)
+    @owner_match = Match.find_by(user_id: params[:user_id])
     room_check = Room.where(owner_id: params[:user_id]).or(Room.where(member_id: params[:user_id]))
     room_check2 = Room.where(owner_id: current_user.id).or(Room.where(member_id: current_user.id))
+    if @owner_match.present?
 # ユーザーがマッチング済みかの判定
 # マッチングしていなければマッチング後にルームを作成
-    if room_check.blank? and room_check2.blank?
-      @room = Room.new
-      @room.owner_id = params[:user_id]
-      @room.member_id = current_user.id
-      @room.save
+      if room_check.blank? and room_check2.blank?
+        @room = Room.new
+        @room.owner_id = params[:user_id]
+        @room.member_id = current_user.id
+        @room.save
 # オーナー側マッチングステータスの更新
-      @owner_match = Match.find_by(user_id: params[:user_id])
-      @owner_match.matching_status = 2
-      @owner_match.room_id = @room.id
-      @owner_match.update(params.permit(:matching_status))
+        @owner_match.matching_status = 2
+        @owner_match.room_id = @room.id
+        @owner_match.update(params.permit(:matching_status))
 # マッチが作成されていない場合はマッチを新規作成
-      if @match.blank?
-        @match = Match.new
-      end
-      @match.matching_status = 2
-      @match.user_id = current_user.id
-      @match.room_id = @room.id
-      @match.room_comment = @owner_match.room_comment
-      @match.game_name = @owner_match.game_name
-      @match.game_hard = @owner_match.game_hard
-      @match.save
+        if @match.blank?
+          @match = Match.new
+        end
+        @match.matching_status = 2
+        @match.user_id = current_user.id
+        @match.room_id = @room.id
+        @match.room_comment = @owner_match.room_comment
+        @match.game_name = @owner_match.game_name
+        @match.game_hard = @owner_match.game_hard
+        @match.save
 # マッチング相手に通知を送信
-      @match.push(@owner_match)
-      redirect_to room_path(@room)
+        @match.push(@owner_match)
+        redirect_to room_path(@room)
+      else
+        redirect_to request.referer, alert: "既に他のユーザーとマッチ中です:<"
+      end
     else
-      redirect_to request.referer, alert: "既に他のユーザーとマッチ中です:<"
+      redirect_to request.referer, alert: "ユーザーが待機中ではありません"
     end
   end
 
