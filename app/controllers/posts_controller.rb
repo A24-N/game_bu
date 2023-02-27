@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @npost = Post.new
     @posts = Post.preload(:user, :tags).order("created_at DESC").page(params[:page]).per(6)
   end
 
@@ -25,7 +24,6 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
-    @comments = @post.comments
     @tags = @post.tags
   end
 

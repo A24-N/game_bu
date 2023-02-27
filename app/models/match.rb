@@ -7,6 +7,7 @@ class Match < ApplicationRecord
   validates :room_comment, presence:true,length:{maximum:200}
 
   enum matching_status: {afk: 0, stand_by: 1, in_action: 2 }
+  enum game_hard: {pc: 0, ps5: 1, ps4: 2, switch: 3, xbox: 4, others:5}
 
   def push(owner)
     params = {"app_id" => ENV['OneSignal_key'],
