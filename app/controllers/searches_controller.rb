@@ -5,9 +5,17 @@ class SearchesController < ApplicationController
     @range = params[:range]
     @word = params[:word]
     if @range == "User"
-      @users = User.where("nickname LIKE?", "%#{@word}%")
+      if @word.blank?
+        @users = User.where("nickname LIKE?", "")
+      else
+        @users = User.where("nickname LIKE?", "%#{@word}%")
+      end
     elsif @range == "Post"
-      @posts = Post.preload(:user).includes([:tags]).where("title LIKE?", "%#{@word}%")
+      if @word.blank?
+         @posts = Post.preload(:user).includes([:tags]).where("title LIKE?", "")
+      else
+        @posts = Post.preload(:user).includes([:tags]).where("title LIKE?", "%#{@word}%")
+      end
     elsif @range == "Tag"
       @posts = Post.joins(:tags).where("name LIKE?", "#{@word}")
     elsif @range == "UserPosts"
