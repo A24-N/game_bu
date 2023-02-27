@@ -5,6 +5,14 @@ ja:
         empty: "未選択"
         enjoy: "エンジョイ"
         hard: "ガチ勢"
+    match:
+      game_hard:
+        pc: "PC"
+        ps5: "PS5"
+        ps4: "PS4"
+        switch: "Switch"
+        xbox: "XBOX"
+        others: "その他"
 
   views:
     pagination:

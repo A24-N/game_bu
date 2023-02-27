@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_06_150555) do
+ActiveRecord::Schema.define(version: 2023_02_27_041007) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2023_02_06_150555) do
     t.integer "matching_status", default: 0, null: false
     t.string "room_comment"
     t.string "game_name"
-    t.string "game_hard"
+    t.integer "game_hard"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_matches_on_room_id"

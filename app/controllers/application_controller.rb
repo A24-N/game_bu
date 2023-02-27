@@ -15,7 +15,9 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to request.referer, alert: 'この操作を行う権限がありません。'
+    # redirect_to request.referer, alert: 'この操作を行う権限がありません。'
+    flash[:alert] = 'この操作を行う権限がありません。'
+    redirect_back(fallback_location: main_path)
   end
 
   def record_not_found

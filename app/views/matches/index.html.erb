@@ -30,7 +30,7 @@
           </div>
           <div class="field">
             <%= f.label :"ハード名:" %>
-            <%= f.text_field :game_hard, placeholder: "ハード名", class: 'form-control' %>
+            <%= f.select :game_hard, Match.game_hards_i18n.invert, {}, class: 'form-control' %>
           </div>
           <div class="field">
             <%= f.label :"ルームコメント:" %>
@@ -51,7 +51,7 @@
         </div>
         <div class="field">
           <%= f.label :"ハード名:" %>
-          <%= f.text_field :search_gamehard, placeholder: "ハード名", class: 'form-control' %>
+          <%= f.select :search_gamehard, Match.game_hards_i18n.invert, {}, class: 'form-control' %>
         </div>
         <div class="action text-right mt-2">
           <%= link_to "クリア", matches_path, class: 'btn btn-outline-success mx-4' %>
@@ -82,7 +82,7 @@
               <% end %>
             </table>
             <p><strong>ゲーム名：</strong><%= match.game_name %></p>
-            <p><strong>ハード名：</strong><%= match.game_hard %></p>
+            <p><strong>ハード名：</strong><%= match.game_hard_i18n %></p>
             <p><strong>ルームコメント：</strong></p>
             <p><%= safe_join(match.room_comment.split("\n"),tag(:br)) %></p>
           </div>
