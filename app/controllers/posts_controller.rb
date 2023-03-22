@@ -11,6 +11,8 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     tag_list = params[:post][:tag].split(',')
+    # 重複しているタグを保存させない
+    tag_list = tag_list.select{|e| tag_list.count(e) > 1}.uniq
     if @post.save
       @post.save_tag(tag_list)
       redirect_to post_path(@post.id), notice: "投稿しました:)"

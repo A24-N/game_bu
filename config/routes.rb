@@ -8,9 +8,18 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
 
-  root to: "homes#top"
   get 'main' => "homes#main"
   get 'error' => "homes#error"
+
+  # userがログインしている時のrootページ
+  authenticated :user do
+    root "homes#main", as: :authenticated_root  # Pathは一意でなければならないため被らないように名前をつける
+  end
+
+  # 未ログイン時のrootページ
+  devise_scope :user do
+    root 'homes#top'
+  end
 
   post 'onesignal/:user_id/add', to: 'users#onesignal_add', as: 'onesignal_add'
   post 'onesignal/:user_id/remove', to: 'users#onesignal_remove', as: 'onesignal_remove'
